@@ -3,8 +3,8 @@
 <h1>Users</h1>
 
 <div class="container-fluid">
-  <div class="row"
-    <div class="col-sm-6">
+  <div class="row">
+    <div class="col-lg-4">
       <table class="table table-inverse">
         <thead class="thead-inverse">
           <tr>
@@ -27,6 +27,16 @@
         </tbody>
       </table>
     </div>
+  </div>
+
+  <div class="row">
+    <p> current_user.username: <%= current_user.username %></p>
+    <p> current_user.email: <%= current_user.email %></p>
+  </div>
+  <div class="row">
+    <% current_user.attributes.each do |key,value| %>
+      <p><%= key %>: <%= value %></p><br>
+    <% end %>
   </div>
 </div>
 
