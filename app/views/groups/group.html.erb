@@ -1,0 +1,12 @@
+<%= div_for group do %>
+  <div class="large-12 columns border border-box glassy-bg mt pt">
+    <strong><%= h(group.group_info) %></strong><br />
+    <sup class="text-muted">From <%= time_ago_in_words(group.created_at)%></sup><br />
+    <div class="mb pb">
+      <%= h(group.group_info) %>
+    </div>
+    <div class="tags">
+      <%=raw group.all_tags %>
+    </div>
+  </div>
+<% end %>

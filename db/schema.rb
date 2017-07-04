@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704000107) do
+ActiveRecord::Schema.define(version: 20170704030120) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "commenter"
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 20170704000107) do
     t.integer  "leader_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["group_id"], name: "index_groups_on_group_id", unique: true, using: :btree
+    t.index ["group_name"], name: "index_groups_on_group_name", unique: true, using: :btree
+    t.index ["leader_id"], name: "index_groups_on_leader_id", using: :btree
+  end
+
+  create_table "groups_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "group_id"
+    t.integer "user_id"
   end
 
   create_table "memberships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -48,6 +56,21 @@ ActiveRecord::Schema.define(version: 20170704000107) do
     t.string   "tags"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_taggings_on_post_id", using: :btree
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  end
+
+  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -77,6 +100,8 @@ ActiveRecord::Schema.define(version: 20170704000107) do
   add_foreign_key "comments", "posts"
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"
+  add_foreign_key "taggings", "posts"
+  add_foreign_key "taggings", "tags"
   add_foreign_key "users", "groups"
   add_foreign_key "users", "memberships"
 end

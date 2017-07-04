@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'groups/index'
+
+  get 'groups/create'
+
+  resources :groups
+
   resources :posts do
   	resources :comments
   end
