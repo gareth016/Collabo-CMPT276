@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE HTML>
 
 <html>
@@ -12,6 +13,21 @@
 			<div id="page-wrapper">
 					<header id="header" class="alt">
 						<h1><a href="Intro.html">Collabo</a></h1>
+        <style>
+            @font-face {
+                font-family: "FontAwesome";
+                src: url('../fonts/fontawesome-webfont.woff') format('woff');
+                src: url('../fonts/fontawesome-webfont.eot') format ('eot'),
+                    url('../fonts/fontawesome-webfont.ttf') format ('truetype'),
+                    url('../fonts/fontawesome-webfont.woff2') format ('woff2'),
+                    url('../fonts/fontawesome-webfont.svg') format ('svg');
+            }
+        </style>
+-->
+	<body class="landing">
+			<div id="page-wrapper">
+					<header id="header" class="alt">
+						<h1><a href="index.html.erb">Collabo</a></h1>
 					</header>
 					<section id="banner">
 						<div class="inner">
@@ -131,13 +147,15 @@
 
 			</div>
 
-			<script src="../../assets/javascripts/jquery.min.js"></script>
-			<script src="../../assets/javascripts/jquery.scrollex.min.js"></script>
-			<script src="../../assets/javascripts/jquery.scrolly.min.js"></script>
-			<script src="../../assets/javascripts/skel.min.js"></script>
-			<script src="../../assets/javascripts/util.js"></script>
+            <%= javascript_include_tag('application.js') %>
+<!--
+            <%= javascript_include_tag('main.js') %>
+            <%= javascript_include_tag('util.js') %>
+            <%= javascript_include_tag('skel.min.js') %>
+            <%= javascript_include_tag('jquery.scrolly.min.js') %>
+            <%= javascript_include_tag('jquery.scrollex.min.js') %>
+            <%= javascript_include_tag('jquery.min.js') %>
+-->
 
-			<script src="../../assets/javascripts/main.js"></script>
 
 	</body>
-</html>
