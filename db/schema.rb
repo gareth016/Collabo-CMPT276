@@ -10,27 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704030120) do
+ActiveRecord::Schema.define(version: 20170713214505) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "commenter"
     t.text     "body",       limit: 65535
     t.integer  "post_id"
+    t.integer  "user_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "group_id"
     t.string   "group_name"
-    t.integer  "member_count", default: 0, null: false
     t.integer  "leader_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["group_id"], name: "index_groups_on_group_id", unique: true, using: :btree
-    t.index ["group_name"], name: "index_groups_on_group_name", unique: true, using: :btree
+    t.integer  "member_count",               default: 0, null: false
+    t.integer  "membership"
+    t.text     "group_info",   limit: 65535
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.index ["group_name"], name: "index_groups_on_group_name", using: :btree
     t.index ["leader_id"], name: "index_groups_on_leader_id", using: :btree
+  end
+
+  create_table "groups_posts", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "group_id", null: false
+    t.integer "post_id",  null: false
+  end
+
+  create_table "groups_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "group_id", null: false
+    t.integer "tag_id",   null: false
   end
 
   create_table "groups_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -39,13 +51,11 @@ ActiveRecord::Schema.define(version: 20170704030120) do
   end
 
   create_table "memberships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "membership_id"
     t.integer  "group_id"
     t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_memberships_on_group_id", using: :btree
-    t.index ["membership_id"], name: "index_memberships_on_membership_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
   end
 
@@ -56,13 +66,22 @@ ActiveRecord::Schema.define(version: 20170704030120) do
     t.string   "tags"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["tags"], name: "index_posts_on_tags", using: :btree
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
+  end
+
+  create_table "posts_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "post_id", null: false
+    t.integer "tag_id",  null: false
   end
 
   create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "post_id"
     t.integer  "tag_id"
+    t.integer  "groups_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["groups_id"], name: "index_taggings_on_groups_id", using: :btree
     t.index ["post_id"], name: "index_taggings_on_post_id", using: :btree
     t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
   end
@@ -95,11 +114,12 @@ ActiveRecord::Schema.define(version: 20170704030120) do
     t.index ["group_id"], name: "index_users_on_group_id", using: :btree
     t.index ["membership_id"], name: "index_users_on_membership_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
-  add_foreign_key "comments", "posts"
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"
+  add_foreign_key "taggings", "groups", column: "groups_id"
   add_foreign_key "taggings", "posts"
   add_foreign_key "taggings", "tags"
   add_foreign_key "users", "groups"
