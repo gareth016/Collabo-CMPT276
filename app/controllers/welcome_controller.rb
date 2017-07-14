@@ -5,5 +5,13 @@ class WelcomeController < ApplicationController
 	
 	def start
         @disable_nav = true
+       #if user_signed_in?
+           #redirect_to :profile
+       #end
     end
+    
+    def profile
+        @disable_nav = true
+    end
+    
 end
