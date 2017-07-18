@@ -38,11 +38,15 @@ ActiveRecord::Schema.define(version: 20170713214505) do
   create_table "groups_posts", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "group_id", null: false
     t.integer "post_id",  null: false
+    t.index ["group_id", "post_id"], name: "index_groups_posts_on_group_id_and_post_id", using: :btree
+    t.index ["post_id", "group_id"], name: "index_groups_posts_on_post_id_and_group_id", using: :btree
   end
 
   create_table "groups_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "group_id", null: false
     t.integer "tag_id",   null: false
+    t.index ["group_id", "tag_id"], name: "index_groups_tags_on_group_id_and_tag_id", using: :btree
+    t.index ["tag_id", "group_id"], name: "index_groups_tags_on_tag_id_and_group_id", using: :btree
   end
 
   create_table "groups_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -67,12 +71,15 @@ ActiveRecord::Schema.define(version: 20170713214505) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["tags"], name: "index_posts_on_tags", using: :btree
+    t.index ["title"], name: "index_posts_on_title", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
   create_table "posts_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "post_id", null: false
     t.integer "tag_id",  null: false
+    t.index ["post_id", "tag_id"], name: "index_posts_tags_on_post_id_and_tag_id", using: :btree
+    t.index ["tag_id", "post_id"], name: "index_posts_tags_on_tag_id_and_post_id", using: :btree
   end
 
   create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
