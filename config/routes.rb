@@ -16,7 +16,6 @@ Rails.application.routes.draw do
     resources :posts, only:[:create, :destroy]
     get 'join', on: :member
   end
-  root 'posts#index' 
 
   resources :posts do
   	resources :comments, only: [:create, :destroy]
