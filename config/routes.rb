@@ -3,12 +3,19 @@ Rails.application.routes.draw do
 
   get 'groups/create'
 
-  resources :groups
+  resources :groups do
+    resources :posts, only:[:create, :destroy]
+    get 'join', on: :member
+  end
 
   resources :posts do
-  	resources :comments
+  	resources :comments, only: [:create, :destroy]
   end
   
+  root 'posts#index' 
+  
+  get 'tags/:tag', to: 'posts#index', as: "tag"
+
   devise_for :users
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

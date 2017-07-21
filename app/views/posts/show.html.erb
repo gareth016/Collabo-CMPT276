@@ -27,7 +27,20 @@
   <strong>Comment:</strong>
   <%= comment.body %>
 </p>
+
+<p>
+  <strong>
+    Posted <%= time_ago_in_words(comment.created_at) %> ago
+  </strong>
+  <br/>
+</p>
+<p>
+  <%= link_to 'Delete', [comment.post, comment], :method => :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>
 <% end %>
+
+
 
 <!-- Allows user to add comments  -->
 <h2> Add a Comment:</h2>

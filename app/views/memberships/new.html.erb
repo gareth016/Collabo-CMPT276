@@ -1,0 +1,32 @@
+<h1>New Membership</h1>
+
+<%= render 'form', membership: @membership %>
+
+<%= link_to 'Back', memberships_path %>
+
+
+<div class="row text-center">
+  <%= form_for(Membership.new, remote: true) do |f| %>
+    <div class="large-10 large-centered columns">
+      <%= f.text_area :group_name, placeholder: "The Group's Name", rows: 5 %>
+    </div>
+<!-- accepting new members layer? -->
+    <div class="large-10 large-centered columns">
+    	<% if user_signed_in? %>
+  			<% if current_user.groups.include?(@group) %>
+       			You're already a member of this group!
+   			<% else %>
+     			<%= form_for [@group, @membership] do |f| %>
+     		    	<%= f.submit "Join" %>
+     		 	<% end %>
+   			<% end %>
+		<% end %>
+	</div>
+<!-- accepting new members layer? -->
+ 
+    <div class="large-10 large-centered columns">
+      <%= f.submit "Join", class: "button"%>
+    </div>
+  <% end %>
+</div>
+

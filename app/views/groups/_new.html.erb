@@ -8,7 +8,7 @@
 <div class="row text-center">
   <%= form_for(Group.new, remote: true) do |f| %>
     <div class="large-10 large-centered columns">
-      <%= f.text_field :author, placeholder: "Author name" %>
+      <%= f.text_field :leader, placeholder: "Leader name" %>
     </div>
     <div class="large-10 large-centered columns">
       <%= f.text_area :content, placeholder: "Your Group", rows: 5 %>

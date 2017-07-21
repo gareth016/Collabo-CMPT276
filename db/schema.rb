@@ -25,14 +25,19 @@ ActiveRecord::Schema.define(version: 20170713214505) do
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "group_name"
+    t.string   "leader"
     t.integer  "leader_id"
-    t.integer  "member_count",               default: 0, null: false
+    t.string   "tags"
     t.integer  "membership"
+    t.integer  "member_count",               default: 0, null: false
     t.text     "group_info",   limit: 65535
+    t.text     "github_link",  limit: 65535
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.index ["group_name"], name: "index_groups_on_group_name", using: :btree
+    t.index ["leader"], name: "index_groups_on_leader", using: :btree
     t.index ["leader_id"], name: "index_groups_on_leader_id", using: :btree
+    t.index ["tags"], name: "index_groups_on_tags", using: :btree
   end
 
   create_table "groups_posts", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -65,13 +70,17 @@ ActiveRecord::Schema.define(version: 20170713214505) do
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
+    t.string   "user"
     t.string   "title"
     t.text     "post",       limit: 65535
+    t.string   "group"
     t.string   "tags"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["group"], name: "index_posts_on_group", using: :btree
     t.index ["tags"], name: "index_posts_on_tags", using: :btree
     t.index ["title"], name: "index_posts_on_title", using: :btree
+    t.index ["user"], name: "index_posts_on_user", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 

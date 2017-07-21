@@ -28974,3 +28974,297 @@ Migrating to CreateJoinTablePostsTags (20170713214505)
   [1m[35m (0.2ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'tags'[0m
   [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
   [1m[35m (0.2ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (181.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Collabo_development`[0m
+  [1m[35m (7.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Collabo_test`[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (51.3ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT GET_LOCK('248579055479252085', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateUsers (20170623080606)
+  [1m[35m (46.1ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `username` varchar(255), `password` varchar(255), `email` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170623080606')[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeviseToUsers (20170630055155)
+  [1m[35m (117.6ms)[0m  [1m[35mALTER TABLE `users` CHANGE `email` `email` varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (53.2ms)[0m  [1m[35mALTER TABLE `users` ADD `encrypted_password` varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (81.6ms)[0m  [1m[35mALTER TABLE `users` ADD `reset_password_token` varchar(255)[0m
+  [1m[35m (68.6ms)[0m  [1m[35mALTER TABLE `users` ADD `reset_password_sent_at` datetime[0m
+  [1m[35m (70.4ms)[0m  [1m[35mALTER TABLE `users` ADD `remember_created_at` datetime[0m
+  [1m[35m (124.8ms)[0m  [1m[35mALTER TABLE `users` ADD `sign_in_count` int DEFAULT 0 NOT NULL[0m
+  [1m[35m (86.1ms)[0m  [1m[35mALTER TABLE `users` ADD `current_sign_in_at` datetime[0m
+  [1m[35m (70.1ms)[0m  [1m[35mALTER TABLE `users` ADD `last_sign_in_at` datetime[0m
+  [1m[35m (126.5ms)[0m  [1m[35mALTER TABLE `users` ADD `current_sign_in_ip` varchar(255)[0m
+  [1m[35m (60.4ms)[0m  [1m[35mALTER TABLE `users` ADD `last_sign_in_ip` varchar(255)[0m
+  [1m[35m (15.5ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (26.8ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170630055155')[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddisAdminToUsers (20170702213158)
+  [1m[35m (72.4ms)[0m  [1m[35mALTER TABLE `users` ADD `is_Admin` tinyint(1) DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170702213158')[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePosts (20170702214959)
+  [1m[35m (62.8ms)[0m  [1m[35mCREATE TABLE `posts` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int, `title` varchar(255), `post` text, `tags` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_posts_on_user_id`  (`user_id`),  INDEX `index_posts_on_title`  (`title`),  INDEX `index_posts_on_tags`  (`tags`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170702214959')[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20170702232145)
+  [1m[35m (52.9ms)[0m  [1m[35mCREATE TABLE `comments` (`id` int AUTO_INCREMENT PRIMARY KEY, `commenter` varchar(255), `body` text, `post_id` int, `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_comments_on_post_id`  (`post_id`),  INDEX `index_comments_on_user_id`  (`user_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170702232145')[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGroups (20170703223450)
+  [1m[35m (71.5ms)[0m  [1m[35mCREATE TABLE `groups` (`id` int AUTO_INCREMENT PRIMARY KEY, `group_name` varchar(255), `leader_id` int, `tags` varchar(255), `membership` int, `member_count` int DEFAULT 0 NOT NULL, `group_info` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_groups_on_group_name`  (`group_name`),  INDEX `index_groups_on_leader_id`  (`leader_id`),  INDEX `index_groups_on_tags`  (`tags`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170703223450')[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMemberships (20170703234433)
+  [1m[35m (49.6ms)[0m  [1m[35mCREATE TABLE `memberships` (`id` int AUTO_INCREMENT PRIMARY KEY, `group_id` int, `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_memberships_on_group_id`  (`group_id`),  INDEX `index_memberships_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_aaf389f138`
+FOREIGN KEY (`group_id`)
+  REFERENCES `groups` (`id`)
+, CONSTRAINT `fk_rails_99326fb65d`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170703234433')[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddMembershipToUser (20170704000107)
+  [1m[35m (86.8ms)[0m  [1m[35mALTER TABLE `users` ADD `membership_id` int[0m
+  [1m[35m (29.4ms)[0m  [1m[35mCREATE  INDEX `index_users_on_membership_id`  ON `users` (`membership_id`) [0m
+  [1m[35m (105.9ms)[0m  [1m[35mALTER TABLE `users` ADD CONSTRAINT `fk_rails_294fd8243b`
+FOREIGN KEY (`membership_id`)
+  REFERENCES `memberships` (`id`)
+[0m
+  [1m[35m (93.6ms)[0m  [1m[35mALTER TABLE `users` ADD `group_id` int[0m
+  [1m[35m (68.4ms)[0m  [1m[35mCREATE  INDEX `index_users_on_group_id`  ON `users` (`group_id`) [0m
+  [1m[35m (128.6ms)[0m  [1m[35mALTER TABLE `users` ADD CONSTRAINT `fk_rails_f40b3f4da6`
+FOREIGN KEY (`group_id`)
+  REFERENCES `groups` (`id`)
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170704000107')[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGroupsUsersJoin (20170704020616)
+  [1m[35m (42.2ms)[0m  [1m[35mCREATE TABLE `groups_users` (`group_id` int, `user_id` int) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170704020616')[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTags (20170704025735)
+  [1m[35m (45.3ms)[0m  [1m[35mCREATE TABLE `tags` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170704025735')[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTaggings (20170704030120)
+  [1m[35m (77.0ms)[0m  [1m[35mCREATE TABLE `taggings` (`id` int AUTO_INCREMENT PRIMARY KEY, `post_id` int, `tag_id` int, `groups_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_taggings_on_post_id`  (`post_id`),  INDEX `index_taggings_on_tag_id`  (`tag_id`),  INDEX `index_taggings_on_groups_id`  (`groups_id`), CONSTRAINT `fk_rails_2c662e858e`
+FOREIGN KEY (`post_id`)
+  REFERENCES `posts` (`id`)
+, CONSTRAINT `fk_rails_9fcd2e236b`
+FOREIGN KEY (`tag_id`)
+  REFERENCES `tags` (`id`)
+, CONSTRAINT `fk_rails_d3a8a5e50b`
+FOREIGN KEY (`groups_id`)
+  REFERENCES `groups` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170704030120')[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddExtraToUsers (20170712203248)
+  [1m[35m (16.3ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_username`  ON `users` (`username`) [0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170712203248')[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJoinTableGroupsPosts (20170713214335)
+  [1m[35m (50.4ms)[0m  [1m[35mCREATE TABLE `groups_posts` (`group_id` int NOT NULL, `post_id` int NOT NULL,  INDEX `index_groups_posts_on_group_id_and_post_id`  (`group_id`, `post_id`),  INDEX `index_groups_posts_on_post_id_and_group_id`  (`post_id`, `group_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170713214335')[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJoinTableGroupsTags (20170713214355)
+  [1m[35m (64.5ms)[0m  [1m[35mCREATE TABLE `groups_tags` (`group_id` int NOT NULL, `tag_id` int NOT NULL,  INDEX `index_groups_tags_on_group_id_and_tag_id`  (`group_id`, `tag_id`),  INDEX `index_groups_tags_on_tag_id_and_group_id`  (`tag_id`, `group_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170713214355')[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJoinTablePostsTags (20170713214505)
+  [1m[35m (45.4ms)[0m  [1m[35mCREATE TABLE `posts_tags` (`post_id` int NOT NULL, `tag_id` int NOT NULL,  INDEX `index_posts_tags_on_post_id_and_tag_id`  (`post_id`, `tag_id`),  INDEX `index_posts_tags_on_tag_id_and_post_id`  (`tag_id`, `post_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170713214505')[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-07-18 03:32:21', '2017-07-18 03:32:21')[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('248579055479252085')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `comments`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'comments'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `groups`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'groups'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `groups_posts`[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `groups_tags`[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `groups_users`[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `memberships`[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `posts`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'posts'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `posts_tags`[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `taggings`[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `tags`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'tags'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (250.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Collabo_development`[0m
+  [1m[35m (7.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Collabo_test`[0m
+  [1m[35m (38.7ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (42.0ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT GET_LOCK('248579055479252085', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateUsers (20170623080606)
+  [1m[35m (47.4ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `username` varchar(255), `password` varchar(255), `email` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170623080606')[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeviseToUsers (20170630055155)
+  [1m[35m (91.3ms)[0m  [1m[35mALTER TABLE `users` CHANGE `email` `email` varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (69.8ms)[0m  [1m[35mALTER TABLE `users` ADD `encrypted_password` varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (62.0ms)[0m  [1m[35mALTER TABLE `users` ADD `reset_password_token` varchar(255)[0m
+  [1m[35m (106.8ms)[0m  [1m[35mALTER TABLE `users` ADD `reset_password_sent_at` datetime[0m
+  [1m[35m (122.2ms)[0m  [1m[35mALTER TABLE `users` ADD `remember_created_at` datetime[0m
+  [1m[35m (64.1ms)[0m  [1m[35mALTER TABLE `users` ADD `sign_in_count` int DEFAULT 0 NOT NULL[0m
+  [1m[35m (58.0ms)[0m  [1m[35mALTER TABLE `users` ADD `current_sign_in_at` datetime[0m
+  [1m[35m (59.6ms)[0m  [1m[35mALTER TABLE `users` ADD `last_sign_in_at` datetime[0m
+  [1m[35m (59.8ms)[0m  [1m[35mALTER TABLE `users` ADD `current_sign_in_ip` varchar(255)[0m
+  [1m[35m (71.9ms)[0m  [1m[35mALTER TABLE `users` ADD `last_sign_in_ip` varchar(255)[0m
+  [1m[35m (16.5ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (20.5ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) [0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170630055155')[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddisAdminToUsers (20170702213158)
+  [1m[35m (91.0ms)[0m  [1m[35mALTER TABLE `users` ADD `is_Admin` tinyint(1) DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170702213158')[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePosts (20170702214959)
+  [1m[35m (130.0ms)[0m  [1m[35mCREATE TABLE `posts` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int, `user` varchar(255), `title` varchar(255), `post` text, `group` varchar(255), `tags` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_posts_on_user_id`  (`user_id`),  INDEX `index_posts_on_user`  (`user`),  INDEX `index_posts_on_title`  (`title`),  INDEX `index_posts_on_group`  (`group`),  INDEX `index_posts_on_tags`  (`tags`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170702214959')[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20170702232145)
+  [1m[35m (70.8ms)[0m  [1m[35mCREATE TABLE `comments` (`id` int AUTO_INCREMENT PRIMARY KEY, `commenter` varchar(255), `body` text, `post_id` int, `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_comments_on_post_id`  (`post_id`),  INDEX `index_comments_on_user_id`  (`user_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170702232145')[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGroups (20170703223450)
+  [1m[35m (86.5ms)[0m  [1m[35mCREATE TABLE `groups` (`id` int AUTO_INCREMENT PRIMARY KEY, `group_name` varchar(255), `leader` varchar(255), `leader_id` int, `tags` varchar(255), `membership` int, `member_count` int DEFAULT 0 NOT NULL, `group_info` text, `github_link` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_groups_on_group_name`  (`group_name`),  INDEX `index_groups_on_leader`  (`leader`),  INDEX `index_groups_on_leader_id`  (`leader_id`),  INDEX `index_groups_on_tags`  (`tags`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170703223450')[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMemberships (20170703234433)
+  [1m[35m (50.8ms)[0m  [1m[35mCREATE TABLE `memberships` (`id` int AUTO_INCREMENT PRIMARY KEY, `group_id` int, `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_memberships_on_group_id`  (`group_id`),  INDEX `index_memberships_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_aaf389f138`
+FOREIGN KEY (`group_id`)
+  REFERENCES `groups` (`id`)
+, CONSTRAINT `fk_rails_99326fb65d`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170703234433')[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddMembershipToUser (20170704000107)
+  [1m[35m (78.6ms)[0m  [1m[35mALTER TABLE `users` ADD `membership_id` int[0m
+  [1m[35m (22.4ms)[0m  [1m[35mCREATE  INDEX `index_users_on_membership_id`  ON `users` (`membership_id`) [0m
+  [1m[35m (100.3ms)[0m  [1m[35mALTER TABLE `users` ADD CONSTRAINT `fk_rails_294fd8243b`
+FOREIGN KEY (`membership_id`)
+  REFERENCES `memberships` (`id`)
+[0m
+  [1m[35m (110.6ms)[0m  [1m[35mALTER TABLE `users` ADD `group_id` int[0m
+  [1m[35m (24.5ms)[0m  [1m[35mCREATE  INDEX `index_users_on_group_id`  ON `users` (`group_id`) [0m
+  [1m[35m (151.6ms)[0m  [1m[35mALTER TABLE `users` ADD CONSTRAINT `fk_rails_f40b3f4da6`
+FOREIGN KEY (`group_id`)
+  REFERENCES `groups` (`id`)
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170704000107')[0m
+  [1m[35m (12.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGroupsUsersJoin (20170704020616)
+  [1m[35m (40.4ms)[0m  [1m[35mCREATE TABLE `groups_users` (`group_id` int, `user_id` int) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170704020616')[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTags (20170704025735)
+  [1m[35m (50.7ms)[0m  [1m[35mCREATE TABLE `tags` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170704025735')[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTaggings (20170704030120)
+  [1m[35m (44.0ms)[0m  [1m[35mCREATE TABLE `taggings` (`id` int AUTO_INCREMENT PRIMARY KEY, `post_id` int, `tag_id` int, `groups_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_taggings_on_post_id`  (`post_id`),  INDEX `index_taggings_on_tag_id`  (`tag_id`),  INDEX `index_taggings_on_groups_id`  (`groups_id`), CONSTRAINT `fk_rails_2c662e858e`
+FOREIGN KEY (`post_id`)
+  REFERENCES `posts` (`id`)
+, CONSTRAINT `fk_rails_9fcd2e236b`
+FOREIGN KEY (`tag_id`)
+  REFERENCES `tags` (`id`)
+, CONSTRAINT `fk_rails_d3a8a5e50b`
+FOREIGN KEY (`groups_id`)
+  REFERENCES `groups` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170704030120')[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddExtraToUsers (20170712203248)
+  [1m[35m (17.5ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_username`  ON `users` (`username`) [0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170712203248')[0m
+  [1m[35m (12.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJoinTableGroupsPosts (20170713214335)
+  [1m[35m (48.3ms)[0m  [1m[35mCREATE TABLE `groups_posts` (`group_id` int NOT NULL, `post_id` int NOT NULL,  INDEX `index_groups_posts_on_group_id_and_post_id`  (`group_id`, `post_id`),  INDEX `index_groups_posts_on_post_id_and_group_id`  (`post_id`, `group_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170713214335')[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJoinTableGroupsTags (20170713214355)
+  [1m[35m (63.2ms)[0m  [1m[35mCREATE TABLE `groups_tags` (`group_id` int NOT NULL, `tag_id` int NOT NULL,  INDEX `index_groups_tags_on_group_id_and_tag_id`  (`group_id`, `tag_id`),  INDEX `index_groups_tags_on_tag_id_and_group_id`  (`tag_id`, `group_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170713214355')[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJoinTablePostsTags (20170713214505)
+  [1m[35m (59.5ms)[0m  [1m[35mCREATE TABLE `posts_tags` (`post_id` int NOT NULL, `tag_id` int NOT NULL,  INDEX `index_posts_tags_on_post_id_and_tag_id`  (`post_id`, `tag_id`),  INDEX `index_posts_tags_on_tag_id_and_post_id`  (`tag_id`, `post_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170713214505')[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-07-21 03:27:42', '2017-07-21 03:27:42')[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('248579055479252085')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `comments`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'comments'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `groups`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'groups'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `groups_posts`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `groups_tags`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `groups_users`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `memberships`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `posts`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'posts'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `posts_tags`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `taggings`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `tags`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'tags'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
