@@ -14,8 +14,7 @@
 			<header id="header">
 				<div class="inner">
 					<!-- <div class = "image avatar"><%= image_tag("avatar00.jpg", :alt=>"")%></div> -->
-					<h1><strong>Henry Tan</strong><br /> 
-					instagram@<a href="https://instagram.com/kitannn">kitannn</a>.<br /></h1>
+					<h1><strong><%=current_user.username %></strong><br />
 				</div>
 <!--
                 <nav id="nav">
@@ -39,17 +38,16 @@
 
 					<section id="one">
 						<header class="major">
-							<h2>Insert comment/status <br />
-							or a welcome message here</h2>
+							<%= grav_pic(current_user)%>
+							<h2><%= current_user.username%>'s Profile Page <br /></h2>
+							<div></div>
+							<div class = "button">Edit Profile</div>
+							<div class = "button"><%= link_to('Logout', destroy_user_session_path, method: :delete)%></div>
 						</header>
 						<ul>
-                            <li>List Skills Here</li>
-                            <li>List Skills Here</li>
-                            <li>List Skills Here</li>
-                            <li>List Skills Here</li>
-                            <li>List Skills Here</li>
-                            <li>List Skills Here</li>
-                            <li>List Skills Here</li>
+                            <li>Username: <%= current_user.username%></li>
+                            <li>Email: <%= current_user.email%></li>
+                            <li>Account Created: <%= time_ago_in_words(current_user.created_at) %></li>
                         </ul>
 						<ul class="actions">
 							<li><a href="#three" class="button">Contact Me</a></li>
@@ -61,7 +59,7 @@
 						<div class="row">
 							<article class="6u 12u$(xsmall) work-item">
 							    <div class = "image fit thumb"><%= image_tag("001.jpg", :alt=>"") %></div>
-								<h3>Idea Wall</h3>
+								<h3>Personal Projects</h3>
 								<p>Something about the project. blahblahblahballjksdfj.</p>
 							</article>
 							<article class="6u$ 12u$(xsmall) work-item">
@@ -89,7 +87,6 @@
 				<!-- Three -->
 					<section id="three">
 						<h2>Get In Touch</h2>
-						<p>Let me know whatsup.</p>
 						<div class="row">
 							<div class="8u 12u$(small)">
 								<form method="post" action="#">

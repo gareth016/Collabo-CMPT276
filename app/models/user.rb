@@ -8,5 +8,5 @@ class User < ApplicationRecord
 	#validates :email, presence:true
 
 	has_many :memberships, 	dependent: :destroy
-	has_many :groups, 		through: :memberships
+	has_many :groups, 		through: :memberships\
 end
