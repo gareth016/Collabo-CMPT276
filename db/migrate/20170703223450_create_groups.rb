@@ -8,10 +8,10 @@ class CreateGroups < ActiveRecord::Migration[5.0]
       t.integer     :membership,   foreign_key: true, unique: false
       t.integer     :member_count, default: 0,        null: false
       t.text        :group_info
-      t.text        :github_link,  unique: false
+      t.text        :github_repo,  unique: false
       # store link like this: @news_article.attach.url
       # stack overflow link:
-# https://stackoverflow.com/questions/18854385/how-to-redirect-to-a-url-stored-in-the-database-rails
+      # https://stackoverflow.com/questions/18854385/how-to-redirect-to-a-url-stored-in-the-database-rails
 
       t.timestamps
     end

@@ -11,6 +11,39 @@
     </div>
   <% end %>
 
+<!-- user info below -->
+  <div class="field">
+    <%= f.label :about_info %>
+    <%= f.text_field :about_info %>
+  </div>
+
+  </br>
+
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+  
+  </br>
+
+  <div class="field">
+    <%= f.label :skills %>
+    <%= f.text_field :skills %>
+  </div>
+  
+  </br>
+
+  <div class="field">
+    <%= f.label :github %>
+    <%= f.text_field :github %>
+  </div>
+  
+  </br>
+
+<!-- user info above -->
+
+
+<!-- Account Info below -->
   <div class="field">
     <%= f.label :username %>
     <%= f.text_field :username %>
@@ -31,6 +64,8 @@
   </div>
   
   </br>
+<!-- Account Info Above -->
+
 
   <div class="actions">
     <%= f.submit %>
