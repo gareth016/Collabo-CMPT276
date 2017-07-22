@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :groups do
     resources :posts, only:[:create, :destroy]
     get 'join', on: :member
-  end
+  end 
 
   resources :posts do
   	resources :comments, only: [:create, :destroy]

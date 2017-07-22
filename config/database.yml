@@ -52,3 +52,19 @@ production:
   database: Collabo_production
   username: spblog
   password: <%= ENV['SPBLOG_DATABASE_PASSWORD'] %>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

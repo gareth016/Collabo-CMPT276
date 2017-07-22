@@ -19,5 +19,9 @@
 //= require jquery.scrolly.min
 //= require util
 //= require bootstrap-sprockets
-
+//= profile_jquery.min
+//= profile_jquery.poptrox.min
+//= profile_skel.min
+//= profile_util
+//= profile_main
 //= require_tree .
