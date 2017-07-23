@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <%= stylesheet_link_tag "profile" %>
+		<title>Collabo Profile</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- <link rel="stylesheet" href="assets/css/profile.css" /> 
+					<a href="#" class="image avatar"><img src="images/avatar00.jpg" alt="" /></a>
+					-->
+	</head>
+	<body id="top">
+
+			<header id="header">
+				<div class="inner">
+					<!-- <div class = "image avatar"><%= image_tag("avatar00.jpg", :alt=>"")%></div> -->
+					<h1><strong><%=current_user.username %></strong><br />
+				</div>
+<!--
+                <nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="#">Sign Up</a></li>
+											<li><a href="#">Log In</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+-->
+			</header>
+
+			<div id="main">
+
+					<section id="one">
+						<header class="major">
+							<%= grav_pic(current_user)%>
+							<h2><%= current_user.username%>'s Profile Page <br /></h2>
+							<div></div>
+							<div class = "button">Edit Profile</div>
+							<div class = "button"><%= link_to('Logout', destroy_user_session_path, method: :delete)%></div>
+						</header>
+						<ul>
+                            <li>Username: <%= current_user.username%></li>
+                            <li>Email: <%= current_user.email%></li>
+                            <li>Account Created: <%= time_ago_in_words(current_user.created_at) %></li>
+                        </ul>
+						<ul class="actions">
+							<li><a href="#three" class="button">Contact Me</a></li>
+						</ul>
+					</section>
+
+					<section id="two">
+						<h2>Recent Collabs</h2>
+						<div class="row">
+							<article class="6u 12u$(xsmall) work-item">
+							    <div class = "image fit thumb"><%= image_tag("001.jpg", :alt=>"") %></div>
+								<h3>Personal Projects</h3>
+								<p>Something about the project. blahblahblahballjksdfj.</p>
+							</article>
+							<article class="6u$ 12u$(xsmall) work-item">
+							    <div class = "image fit thumb"><%= image_tag("002.jpg", :alt=>"") %></div>
+								<h3>Community project</h3>
+								<p>Something about the project.</p>
+							</article>
+							<article class="6u 12u$(xsmall) work-item">
+							    <div class = "image fit thumb"><%= image_tag("003.jpg", :alt=>"") %></div>
+								<h3>Corporate Management</h3>
+								<p>Collabo something something.</p>
+							</article>
+							<article class="6u$ 12u$(xsmall) work-item">
+							    <div class = "image fit thumb"><%= image_tag("004.jpg", :alt=>"") %></div>
+								<h3>Sustainable Energy Project</h3>
+								<p>Something somethin Collabo blah blah.</p>
+							</article>
+							
+						</div>
+						<ul class="actions">
+							<li><a href="#" class="button">See all Collabs</a></li>
+						</ul>
+					</section>
+
+				<!-- Three -->
+					<section id="three">
+						<h2>Get In Touch</h2>
+						<div class="row">
+							<div class="8u 12u$(small)">
+								<form method="post" action="#">
+									<div class="row uniform 50%">
+										<div class="6u 12u$(xsmall)"><input type="text" name="name" id="name" placeholder="Name" /></div>
+										<div class="6u$ 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="Email" /></div>
+										<div class="12u$"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
+									</div>
+								</form>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</div>
+							
+						</div>
+					</section>
+
+	
+			</div>
+<!--
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Collabo by SFU</li>
+					</ul>
+				</div>
+			</footer>
+
+
+			<script src="assets/js/profile_jquery.min.js"></script>
+			<script src="assets/js/profile_jquery.poptrox.min.js"></script>
+			<script src="assets/js/profile_skel.min.js"></script>
+			<script src="assets/js/profile_util.js"></script>
+			<script src="assets/js/profile_main.js"></script>
+-->
+	</body>
+</html>

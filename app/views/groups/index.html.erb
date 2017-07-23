@@ -1,0 +1,17 @@
+<div class = "row">
+	<div class = "large-8 columns">
+		<%= render partial: "groups/new" %>
+	</div>
+</div>
+
+<div class="row mt pt">
+  <div class="large-5 columns">
+    <div class="top-pad glassy-bg">
+      <%= render partial: "groups/new" %>
+    </div>
+  </div>
+  <div class= "large-7 columns" id="groups">
+    <%= render partial: @groups.reverse %>
+  </div>
+</div>
+

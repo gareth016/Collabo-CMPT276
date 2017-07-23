@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :configure_permitted_parameters#, if: :devise_controller?
+  before_action :configure_permitted_parameters
 
   # GET /users
   # GET /users.json

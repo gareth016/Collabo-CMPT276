@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @post.post %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @post.user_id %>
+</p>
+
+<!-- Prints the existing comments -->
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+<p>
+	<strong>Commenter:</strong>
+	<%= comment.commenter %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= comment.body %>
+</p>
+
+<p>
+  <strong>
+    Posted <%= time_ago_in_words(comment.created_at) %> ago
+  </strong>
+  <br/>
+</p>
+<p>
+  <%= link_to 'Delete', [comment.post, comment], :method => :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>
+<% end %>
+
+
+
+<!-- Allows user to add comments  -->
+<h2> Add a Comment:</h2>
+<%= form_for([@post, @post.comments.build]) do |f| %>
+<p>
+	<%= f.label :commenter %><br />
+	<%= f.text_field :commenter %>
+</p>
+
+<p>
+  <%= f.label :body %><br />
+  <%= f.text_area :body %>
+</p>
+
+<p>
+	<%= f.submit %>
+</p>
+
+<% end %>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

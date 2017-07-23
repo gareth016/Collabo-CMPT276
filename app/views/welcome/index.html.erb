@@ -1,67 +1,129 @@
-<!--<%= link_to 'Create User', new_user_path %>-->
+<!DOCTYPE HTML>
 
-<div class="container-fluid">
-	<div class="row">
-	  	<h1>Collabo: The Online Project Collaboration Solution</h1>
-	</div>
-	<div class="row">
-		<div class="col-sm-4">
-			<h3>What is Collabo?</h3>
-		</div>
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4">
-			<h3>Meet the Team</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-4">
-			<p>Group Organizer Collabo is a group matching solution for individuals aspiring to work on personal, business or school projects. Similar group forming websites do exist, but none for the sole purpose of working on projects. People currently resolve this problem by working with friends, co-workers, and classmates or connecting through social media sites such as LinkedIn and Facebook. With Collabo, users are no longer limited to the reaches of their social network nor their geographical location. Users from anywhere in the world can connect to this online network and immediately begin finding projects to collaborate on. Collabo reduces the chances of encountering the ever-dreaded slackers and slobs, as this web app targets proactive individuals who want to build and develop a career. High schoolers, undergraduates, graduate students, and even business professionals will use our product to bolster their skill sets and experiences to pursue their career.
-			</p>
-		</div>
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4">
-			<table class="table table-inverse">
-			  <thead class="thead-inverse">
-			    <tr>
-			      <th>#</th>
-			      <th>First Name</th>
-			      <th>Last Name</th>
-			      <th>Role</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <th scope="row">1</th>
-			      <td>Gareth</td>
-			      <td>Moon</td>
-			      <td>Front End</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">2</th>
-			      <td>Eric</td>
-			      <td>Lam</td>
-			      <td>Back End</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">3</th>
-			      <td>Henry</td>
-			      <td>Tan</td>
-			      <td>Front End</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">4</th>
-			      <td>Bryce</td>
-			      <td>Golamco</td>
-			      <td>Back End</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">5</th>
-			      <td>David</td>
-			      <td>Guo</td>
-			      <td>All</td>
-			    </tr>
-			  </tbody>
-			</table>
-		</div>
-  	</div>
-</div>
+<html>
+
+	<body class="landing">
+			<div id="page-wrapper">
+					<header id="header" class="alt">
+						<h1><a href="index.html.erb">Collabo</a></h1>
+					</header>
+					<section id="banner">
+						<div class="inner">
+							<h2>Collabo</h2>
+							<p>A Tool for like-minded people<br />
+							crafted by <a href="http://sfu.ca">SFU</a>.
+                            </p>
+							<ul class="actions">
+								<li><div class = "button fit special"><%= link_to 'Get Started', start_path%></div></li> <!--launch login/register session-->
+							</ul>
+						</div>
+						<a href="#one" class="more scrolly">Learn More</a>
+					</section>
+
+					<section id="one" class="wrapper style1 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Passion projects don't need to be done alone<br />
+								We're here to help you with that</h2>
+								<p>Whether it be community building or coding projects, Collabo is full of people
+                                looking to connect with you to join their vision in bringing their projects to life.
+                               </p>
+							</header>
+							<ul class="icons major">
+								<li><span class="icon fa-diamond major style1"><span class="label">Lorem</span></span></li>
+								<li><span class="icon fa-heart-o major style2"><span class="label">Ipsum</span></span></li>
+								<li><span class="icon fa-code major style3"><span class="label">Dolor</span></span></li>
+							</ul>
+						</div>
+					</section>
+
+					<section id="two" class="wrapper alt style2">
+						<section class="spotlight">
+							<div class="image"><%= image_tag("pic01.jpg", :alt=>"")%></div><div class="content">
+								<h2>Passionate and smart people<br />
+								all around you</h2>
+								<p>Connect with hundreds of groups looking for someone with the correct skillset. Join local projects in your city or community.</p>
+							</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><%= image_tag("pic02.jpg", :alt=>"")%></div><div class="content">
+								<h2>Reach wide audiences<br />
+								like never before</h2>
+								<p>It's hard to find the person with the right skillset, but we're sure you'll find someone perfect for the job.</p>
+							</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><%= image_tag("pic03.jpg", :alt=>"")%></div><div class="content">
+								<h2>Small, Medium, Large, or Global<br />
+								there's a project fit for you</h2>
+								<p>Connect with passionate people all across the globe.</p>
+							</div>
+						</section>
+					</section>
+
+					<section id="three" class="wrapper style3 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Social functions in a professional environment</h2>
+								<p>A gathering of industry standard functionality from social media and professional workplaces.<br /> 
+                                    All encompassed in a sleek and easy to use platform. </p>
+							</header>
+							<ul class="features">
+								<li class="icon fa-paper-plane-o">
+									<h3>Smart Search</h3>
+									<p>A smart system that learns what kind of projects and skills you are interested in. Making the search an ever simplyfing process. </p>
+								</li>
+								<li class="icon fa-laptop">
+									<h3>Embedded communication</h3>
+									<p>No need to go through the process of exchanging contact information with an embedded group messaging and instant messaging platform</p>
+								</li>
+								<li class="icon fa-code">
+									<h3>Simple UI</h3>
+									<p>Created with only the user in mind. That means no confusing symbols, buttons, or unecessary menus. Just pure ease of access.</p>
+								</li>
+								<li class="icon fa-headphones">
+									<h3>Get notified</h3>
+									<p>Subscribe to your favourite topics to receive notifications and find the latest events and projects. </p>
+								</li>
+								<li class="icon fa-heart-o">
+									<h3>Organic Engagement</h3>
+									<p>Only the people and projects related to what your interests in will show up so there's no need to painfully filter through everything.</p>
+								</li>
+								<li class="icon fa-flag-o">
+									<h3>Global Reach</h3>
+									<p>Collaborating doesn't mean you need to be sitting right next to each other. Connect with thousands of passionate people all across the globe.
+                                    Just be sure you can communicate properly.</p>
+								</li>
+							</ul>
+						</div>
+					</section>
+
+					<section id="cta" class="wrapper style4">
+						<div class="inner">
+							<header>
+								<h2>Ready to collaborate?</h2>
+								<p>Love Collabo but have some constructive criticism? Big ideas you want implemented? Give us a yell! We're ready to Collabo-rate.</p>
+							</header>
+							<ul class="actions vertical">
+								<li><div class = "button fit special"><%= link_to 'Get Started', start_path%></div></li>
+								<li><div class = "button fit"><%= link_to 'Contact Us', start_path%></div></li>
+							</ul>
+						</div>
+					</section>
+
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; Collabo by SFU</li>
+						</ul>
+					</footer>
+
+			</div>
+
+	</body>
+</html>

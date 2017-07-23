@@ -1,0 +1,49 @@
+<div class ="row text-center">
+<%= form_for(Post.new, remote: true) do |f| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="large-10 large-centered columns">
+    <%= f.label :title %>
+    <%= f.text_field :title, placeholder: "Title" %>
+  </div>
+
+<!-- maybe: user field needs to be automatically inputted -->
+  <div class="large-10 large-centered columns">
+    <%= f.label :user %>
+    <%= f.text_field :user, placeholder: "Username" %>
+  </div>
+<!-- maybe: user field needs to be automatically inputted -->
+
+  <!-- this needs to become a drop down menu bar -->
+  <div class="large-10 large-centered columns">
+    <%= f.label :group %>
+    <%= f.text_field :group, placeholder: "Group" %>
+  </div> 
+  <!-- this needs to become a drop down menu bar/ -->
+
+
+  <div class="large-10 large-centered columns">
+    <%= f.label :post %>
+    <%= f.text_area :post, placeholder: "Your Post", rows: 6 %>
+  </div>
+
+  <div class="large-10 large-centered columns">
+    <%= f.label :tags %>
+    <%= f.text_field :all_tags, placeholder: "Tags are separated with a comma" %>
+  </div>
+
+  <div class="large-10 large-centered columns">
+    <%= f.submit "Post", class: "button" %>
+  </div>
+<% end %>
+</div>

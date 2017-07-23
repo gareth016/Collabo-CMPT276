@@ -1,0 +1,5 @@
+
+var new_post = $("<%= escape_javascript(render(partial: @post))%>").hide();
+$('#groups').prepend(new_group);
+$('#group_<%= @group.id %>').fadeIn('slow');
+$('#new_group')[0].reset();
