@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713214505) do
+ActiveRecord::Schema.define(version: 20170723000624) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "commenter"
@@ -111,25 +111,21 @@ ActiveRecord::Schema.define(version: 20170713214505) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "username"
     t.string   "password"
-    t.string   "email",                                default: "",    null: false
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
-    t.string   "encrypted_password",                   default: "",    null: false
+    t.string   "email",                  default: "",    null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.boolean  "is_Admin",                             default: false, null: false
+    t.boolean  "is_Admin",               default: false, null: false
     t.integer  "membership_id"
     t.integer  "group_id"
-    t.text     "skills",                 limit: 65535
-    t.text     "about_info",             limit: 65535
-    t.text     "location",               limit: 65535
-    t.text     "github",                 limit: 65535
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["group_id"], name: "index_users_on_group_id", using: :btree
     t.index ["membership_id"], name: "index_users_on_membership_id", using: :btree
