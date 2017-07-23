@@ -12,11 +12,10 @@ class WelcomeController < ApplicationController
     
     def profile
         @disable_nav = true
-        # if user_signed_in?
-        #     redirect_to :profile
-        # else
-        #     redirect_to :start
-        # end
+        if user_signed_in?
+         else
+            redirect_to :start
+        end
     end
     
 end
