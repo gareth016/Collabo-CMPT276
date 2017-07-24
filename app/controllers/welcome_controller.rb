@@ -1,6 +1,9 @@
 class WelcomeController < ApplicationController
 	def index
          @disable_nav = true
+	    if user_signed_in?
+	       redirect_to :profile 
+	    end
 	end
 	
 	def start
