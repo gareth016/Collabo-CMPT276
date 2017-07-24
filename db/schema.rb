@@ -123,12 +123,15 @@ ActiveRecord::Schema.define(version: 20170713214505) do
     t.integer  "membership_id"
     t.integer  "group_id"
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["membership_id"], name: "index_users_on_membership_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
 =======
+=======
+>>>>>>> b48f4430e398360674aee3aed27b4575b4cee334
     t.text     "skills",                 limit: 65535
     t.text     "about_info",             limit: 65535
     t.text     "location",               limit: 65535
