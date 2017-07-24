@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :configure_permitted_parameters
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   # GET /users
   # GET /users.json
@@ -73,11 +73,11 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :email)
+      params.require(:user).permit(:id, :password, :email)
     end
 
   protected
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:id])
     end
 end
