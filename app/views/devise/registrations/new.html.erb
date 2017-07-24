@@ -3,7 +3,7 @@
 <body class="landing">
 <div id="page-wrapper">
 
-  <br /><%= button_to "Collabo", welcome_path, method: :get %></p>
+<br /><h3><%= button_to "Collabo", welcome_path, method: :get %></h3></p>
 
 <h2>Sign up</h2>
 
@@ -11,14 +11,14 @@
   <%= devise_error_messages! %>
 
   <div class="field">
-    <p><%= f.label :username %><br />
+    <p><h1><%= f.label :username %></h1><br />
     <%= f.text_field :username %></p>
-    <%= f.label :email %><br />
+    <h1><%= f.label :email %></h1><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <h1><%= f.label :password %></h1>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
