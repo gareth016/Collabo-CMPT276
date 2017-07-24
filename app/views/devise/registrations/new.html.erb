@@ -3,19 +3,18 @@
 <body class="landing">
 <div id="page-wrapper">
 
+  <br /><%= button_to "Collabo", welcome_path, method: :get %></p>
+
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
+    <p><%= f.label :username %><br />
+    <%= f.text_field :username %></p>
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :username %><br/>
-    <%= f.text_field :username %>
   </div>
 
   <div class="field">
@@ -36,6 +35,10 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= "-or-" %>
+ <br /></p>
+<%= button_to "Log In", users_path, method: :get %>
+  <br /></p>
+  <br /></p>
 </div>
 </body>
