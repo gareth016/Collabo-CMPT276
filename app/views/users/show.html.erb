@@ -1,19 +1,51 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Edit', edit_user_path(@user) %>
 <%= link_to 'Back', users_path %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4">
+      <table class="table table-inverse">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Username </th> <!--Column name   -->
+            <th>Email </th> <!--Column name   -->
+            <th>Password </th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><%= @user.username %></td>
+              <td><%= @user.email %></td>
+              <td><%= @user.password%></td>
+              <td><%= link_to 'Edit', edit_user_path(@user) %></td>
+              <td><%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        </tbody>
+      </table>
+	  <table class="table table-inverse">
+      	<thead class="thead-inverse">
+		<tr>
+            <th>User Attribute </th> <!--Column name   -->
+            <th>Field </th> <!--Column name   -->
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+       		<tbody>
+            <tr>
+  			  <% @user.attributes.each do |key,value| %>
+				<tr>
+			  		<td><%= key %>: </td>
+			  		<td><%= value %></td>
+				</tr>
+			  <% end %>
+            </tr>
+        	</tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
