@@ -7,11 +7,18 @@ class WelcomeController < ApplicationController
         @disable_nav = true
        if user_signed_in?
            redirect_to :profile
-        else 
-          # redirect_to :start
        end
     end
-    
+
+  def signin
+    if user_signed_in?
+      redirect_to :profile
+    else
+      new_user_session_path
+    end
+  end
+  helper_method :signin
+
     def profile
         @disable_nav = true
         if user_signed_in?
@@ -20,4 +27,5 @@ class WelcomeController < ApplicationController
         end
     end
     
+
 end
