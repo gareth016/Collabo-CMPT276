@@ -18,10 +18,12 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    format.html{ redirect_to @profile, notice:"Welcome Back!"}
   end
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -31,7 +33,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @profile, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -43,8 +45,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @user = User.find(params[:id])
+
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update_attributes(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -73,7 +77,13 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
+<<<<<<< HEAD
       params.require(:user).permit(:id, :password, :email, :avatar)
+=======
+      params.require(:user).permit(:id, :password, :email, :username, :about_info,
+      :location, :skills, :github, :membership_id, :group_id, 
+      :reset_password_token, :remember_created_at)
+>>>>>>> d21f5e72f45461d3918d555220677048e000157d
     end
 
   protected

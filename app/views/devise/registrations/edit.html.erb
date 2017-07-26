@@ -1,7 +1,11 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%= button_to "Back", profile_path(resource_name), method: :get %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
+
+<!-- Account Info below -->
+<h2>Account Details: </h2>
 
   <div class="field">
     <p><%= f.label :username %><br />
@@ -22,7 +26,7 @@
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
   </div>
-
+  </br>
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
@@ -32,14 +36,47 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
+<!-- Account Info Above -->
+
+  </br>
+
+<!-- user info below -->
+<h2>User Details: </h2>
+  <div class="field">
+    <%= f.label :about_info %>
+    <%= f.text_field :about_info %>
+  </div>
+
+  </br>
+
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+  
+  </br>
+
+  <div class="field">
+    <%= f.label :skills %>
+    <%= f.text_field :skills %>
+  </div>
+  
+  </br>
+
+  <div class="field">
+    <%= f.label :github %>
+    <%= f.text_field :github %>
+  </div>
+  
+  </br>
+<!-- user info above -->
 
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3>Unhappy with our services?</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<%= button_to "Back", profile_path(resource_name), method: :get %>
