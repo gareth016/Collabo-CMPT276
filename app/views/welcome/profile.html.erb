@@ -41,7 +41,7 @@
 							<%= grav_pic(current_user)%>
 							<h2><%= current_user.username%>'s Profile Page <br /></h2>
 							<div></div>
-							<div class = "button">Edit Profile</div>
+							<div class = "button"><%= link_to('Edit Profile',edit_user_registration_path(current_user)) %></div>
 							<div class = "button"><%= link_to('Logout', destroy_user_session_path, method: :delete)%></div>
 						</header>
 						<ul>

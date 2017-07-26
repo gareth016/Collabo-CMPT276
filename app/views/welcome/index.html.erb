@@ -14,12 +14,11 @@
 							crafted by <a href="http://sfu.ca">SFU</a>.
                             </p>
 							<ul class="actions">
-								<li><div class = "button fit special"><%= link_to 'Get Started', start_path%></div></li> 
+								<li><div class = "button fit special"><%= link_to 'Get Started', new_user_registration_path%></div></li> 
 								<!--launch login/register session-->
-								 <br /></p>
 								 <br /><p>-or-<br /></p>
-								<br /><p>Already a member?<br /></p>
-								<li><div class = "button fit special"><%= link_to 'Log In', users_path%></div></li>
+								<p>Already a member?<br />
+								<li><div class = "button fit special"><%= link_to 'Log In', new_user_session_path%></div></li>
 								 <!-- log in button  -->
 							</ul>
 						</div>
