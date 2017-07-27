@@ -74,11 +74,11 @@ ActiveRecord::Schema.define(version: 20170713214505) do
     t.string   "title"
     t.text     "post",       limit: 65535
     t.string   "group"
-    t.string   "tags"
+    t.string   "tag_list"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["group"], name: "index_posts_on_group", using: :btree
-    t.index ["tags"], name: "index_posts_on_tags", using: :btree
+    t.index ["tag_list"], name: "index_posts_on_tag_list", using: :btree
     t.index ["title"], name: "index_posts_on_title", using: :btree
     t.index ["user"], name: "index_posts_on_user", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree

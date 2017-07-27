@@ -1,27 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Collabo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-
-    
   </head>
 
-  <body <%= yield(:body_attributes) %>>
-  
-  <%= render partial: "shared/navbar" unless @disable_nav %>
-  <%= render "layouts/header" %>
-<!--
-  	<p class="notice"><%= notice %></p>
-   	<p class="alert"><%= alert %></p>
--->
+  <body>
 
     <%= yield %>
-  
 
   </body>
-    
 </html>

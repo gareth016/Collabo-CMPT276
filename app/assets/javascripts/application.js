@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require main
 //= require skel.min
 //= require jquery.min
@@ -25,3 +26,5 @@
 //= profile_util
 //= profile_main
 //= require_tree .
+
+$(function(){ $(document).foundation(); });

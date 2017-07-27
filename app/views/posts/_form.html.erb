@@ -1,5 +1,5 @@
 <div class ="row text-center">
-<%= form_for(Post.new, remote: true) do |f| %>
+<%= form_for(post) do |f| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -18,10 +18,7 @@
   </div>
 
 <!-- maybe: user field needs to be automatically inputted -->
-  <div class="large-10 large-centered columns">
-    <%= f.label :user %>
-    <%= f.text_field :user, placeholder: "Username" %>
-  </div>
+
 <!-- maybe: user field needs to be automatically inputted -->
 
   <!-- this needs to become a drop down menu bar -->
@@ -38,12 +35,12 @@
   </div>
 
   <div class="large-10 large-centered columns">
-    <%= f.label :tags %>
-    <%= f.text_field :all_tags, placeholder: "Tags are separated with a comma" %>
+    <%= f.label :tag_list %>
+    <%= f.text_field :tag_list, placeholder: "Tags are separated with a comma" %>
   </div>
 
-  <div class="large-10 large-centered columns">
-    <%= f.submit "Post", class: "button" %>
+  <div class="actions">
+    <%= f.submit "Post" %>
   </div>
 <% end %>
 </div>
