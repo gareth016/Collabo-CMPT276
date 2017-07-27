@@ -1,9 +1,10 @@
-<h1>Editing User</h1>
+<h2>Edit <%= @user.username.to_s.humanize %></h2>
+
 
 <%= link_to 'Show', edit_user_registration_path %> |
-<%= link_to 'Back', profile_path %>
+<%= link_to 'Back', user_path %>
 
 <%= render 'form', user: @user %>
 
 <%= link_to 'Show', edit_user_registration_path %> |
-<%= link_to 'Back', profile_path %>
+<%= link_to 'Back', user_path %>

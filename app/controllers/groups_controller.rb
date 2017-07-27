@@ -2,10 +2,7 @@ class GroupsController < ApplicationController
   def index
     if params[:tag]
       @groups = Group.tagged_with(params[:tag])
-    else
-      @groups = Group.all
-    end
-    if params[:group_name]
+    elsif params[:group_name]
       @groups = Group.group_name_with(params[:group_name])
     else
       @groups = Group.all
@@ -13,11 +10,15 @@ class GroupsController < ApplicationController
   end
 
   def show
-    # redirect_to @group.github_repo
   end
 
   def new
     @group = Group.new
+    format.html{ redirect_to @group, notice:"Welcome!"}
+  end
+
+  def edit
+    @group = Group.find(params[:id])
   end
 
   def update
@@ -39,6 +40,8 @@ class GroupsController < ApplicationController
   	respond_to do |format|
   		if @group.save
   			format.js
+        # redirect_to group_path(@group)
+
   		else
   			redirect_to group_path(@group)
   		end
@@ -46,9 +49,9 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    @group = Group.find(params[:group_id])
+    @group = Group.find(params[:id])
     @group.destroy
-    redirect_to group_path(@group)
+    redirect_to profile_path(current_user)
   end
 
 def join
@@ -71,7 +74,8 @@ def join
   end
 
   def group_params
-    params.require(:group).permit(:membership)
+    params.require(:group).permit(:membership, :tags, :group_name, :leader, :leader_id, 
+      :member_count, :group_info, :github_repo)
   end
 
   protected
