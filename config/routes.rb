@@ -10,15 +10,10 @@ Rails.application.routes.draw do
   # get 'posts', to: ''
   root 'welcome#index'
 
-  get 'groups/index'
-  get 'groups/create'
-  get 'groups/new'
-  # resources :groups
+  devise_for :groups
+  resources :groups
 
-  resources :groups do
-    resources :posts, only:[:create, :destroy]
-    get 'join', on: :member
-  end 
+  # POST 'groups/new'
 
   resources :posts do
   	resources :comments, only: [:create, :destroy]

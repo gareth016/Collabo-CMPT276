@@ -1,6 +1,9 @@
 <h1>Editing Group</h1>
 
-<%= render 'form', Group: @post %>
+<%= link_to 'Show', @Group %> |
+<%= link_to 'Back', groups_path %>
+
+<%= render 'form', Group: @group %>
 
 <%= link_to 'Show', @Group %> |
-<%= link_to 'Back', Groups_path %>
+<%= link_to 'Back', groups_path %>

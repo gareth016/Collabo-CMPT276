@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+before_action :set_group, only: [:show, :edit, :update, :destroy]
+
   def index
     if params[:tag]
       @groups = Group.tagged_with(params[:tag])
@@ -14,7 +16,6 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
-    format.html{ redirect_to @group, notice:"Welcome!"}
   end
 
   def edit
@@ -23,7 +24,7 @@ class GroupsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @group.update(group_params)
+      if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
@@ -33,17 +34,15 @@ class GroupsController < ApplicationController
     end
   end
 
-
-
   def create
   	@group = Group.new(group_params)
   	respond_to do |format|
   		if @group.save
-  			format.js
-        # redirect_to group_path(@group)
-
+        format.html { redirect_to group_path(@group), notice: 'Group was successfully created.' }
+        format.json { render :show, status: :created, location: @group }
   		else
-  			redirect_to group_path(@group)
+        format.html { render :new }
+        format.json { render json: @group.errors, status: :unprocessable_entity }
   		end
   	end
   end
@@ -72,15 +71,11 @@ def join
   def set_group
     @group = Group.find(params[:id])
   end
-
-  def group_params
-    params.require(:group).permit(:membership, :tags, :group_name, :leader, :leader_id, 
-      :member_count, :group_info, :github_repo)
-  end
-
   protected
   def group_params
-  	params.require(:group).permit(:group_name, :group_info, :leader, :member_count)
+    params.permit(:membership, :id, 
+      :tags, :group_name, :leader, :leader_id, 
+      :member_count, :group_info, :github_repo)
   end
 
 end
