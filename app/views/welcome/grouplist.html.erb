@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <%= stylesheet_link_tag "group_main" %>
+		<title>Collabo by SFU</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--<link rel="stylesheet" href="assets/css/group_main.css" /> -->
+	</head>
+	<body class="is-loading">
+
+			<div id="wrapper" class="fade-in">
+
+					<header id="header">
+					    <div class = "logo"><%= link_to('Collabo', root_path) %></div>
+						<!--<a href="grouplist.html" class="logo">Collabo</a> -->
+					</header>
+
+					<div id="main">
+							<article class="post featured">
+								<header class="major">
+					                <h2><div class = "logo"><%= link_to('Featured Collab', groupdetail_path) %></div></h2>
+									<!--<h2><a href="groupdetail.html">Featured Collab</a></h2> -->
+									<p>Something about this featured collab.</p>
+								</header>
+								<div class="image main"><%= image_tag("gl001.jpg", :alt=>"")%></div>
+								<!--<a href="groupdetail.html" class="image main"><img src="images/001.jpg" alt="" /></a> -->
+								<ul class="actions">
+								    <li><div class = "button big"><%= link_to('Learn More', groupdetail_path)%></div></li>
+									<!--<li><a href="groupdetail.html" class="button big">Learn More</a></li>-->
+								</ul>
+							</article>
+
+							<section class="posts">
+								<article>
+									<header>
+									    <h2><%= link_to('Collabo 1', root_path)%></h2>
+										<!--<h2><a href="groupdetail.html">collabo 1</a></h2>-->
+									</header>
+									<div class="image fit"><%= image_tag("gl000.jpg", :alt=>"")%></div>
+									<!-- <a href="groupdetail.html" class="image fit"><img src="images/000.jpg" alt="" /></a> -->
+									<p>Blah blah blah  blah blah blah blah  blah blah  blah blah </p>
+									<ul class="actions">
+										<li><a href="groupdetail.html" class="button">Learn More</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h2><a href="groupdetail.html">collabo 2</a></h2>
+									</header>
+									
+									<div class="image fit"><%= image_tag("gl003.jpg", :alt=>"")%></div>
+									<!--<a href="groupdetail.html" class="image fit"><img src="images/003.jpg" alt="" /></a> -->
+									<p>Blah blah blah  blah blah blah blah  blah blah  blah blah </p>
+									<ul class="actions">
+										<li><a href="groupdetail.html" class="button">Learn More</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h2><a href="groupdetail.html">collabo 3</a></h2>
+									</header>
+									
+									<div class="image fit"><%= image_tag("gl004.jpg", :alt=>"")%></div>
+									<!--<a href="groupdetail.html" class="image fit"><img src="images/004.jpg" alt="" /></a> -->
+									<p>Blah blah blah  blah blah blah blah  blah blah  blah blah </p>
+									<ul class="actions">
+										<li><a href="groupdetail.html" class="button">Learn More</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h2><a href="groupdetail.html">collabo 4</a></h2>
+									</header>
+									
+									<div class="image fit"><%= image_tag("gl005.jpg", :alt=>"")%></div>
+									<!-- <a href="groupdetail.html" class="image fit"><img src="images/005.jpg" alt="" /></a> -->
+									<p>Blah blah blah  blah blah blah blah  blah blah  blah blah </p>
+									<ul class="actions">
+										<li><a href="groupdetail.html" class="button">Learn More</a></li>
+									</ul>
+								</article>
+								
+							</section>
+
+							<footer>
+								<div class="pagination">
+									<!--<a href="#" class="previous">Prev</a>-->
+									<a href="#" class="page active">1</a>
+									<a href="#" class="page">2</a>
+									<a href="#" class="page">3</a>
+									<span class="extra">&hellip;</span>
+									<a href="#" class="page">8</a>
+									<a href="#" class="page">9</a>
+									<a href="#" class="page">10</a>
+									<a href="#" class="next">Next</a>
+								</div>
+							</footer>
+
+					</div>
+
+					<footer id="footer">
+						<section class="split contact">
+							<section>
+								<ul class="icons alt" align="center">
+									<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+					<div id="copyright">
+						<ul><li>&copy; Collabo by SFU</li></ul>
+					</div>
+
+			</div>
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/group_main.js"></script>
+
+	</body>
+</html>
