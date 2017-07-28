@@ -20,11 +20,12 @@
 //= require jquery.scrolly.min
 //= require util
 //= require bootstrap-sprockets
-//= profile_jquery.min
-//= profile_jquery.poptrox.min
-//= profile_skel.min
-//= profile_util
-//= profile_main
+//= require profile_jquery.min
+//= require profile_jquery.poptrox.min
+//= require profile_skel.min
+//= require profile_util
+//= require profile_main
+//= require group_main
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

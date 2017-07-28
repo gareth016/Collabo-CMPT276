@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'welcome', to: 'welcome#index'
-  get 'start', to:  'welcome#start'
   get 'profile', to: 'welcome#profile'
+  get 'groupdetail', to: 'welcome#groupdetail'
+  get 'grouplist', to: 'welcome#grouplist'
   # get 'posts', to: ''
   root 'welcome#index'
 
