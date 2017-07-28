@@ -13,6 +13,13 @@
 
   <body>
 
+  <% if @disable_nav != true %>
+    <%= render partial: "shared/navbar" %>
+  <% end %>
+  <% if false %>
+  <!-- <p>@disable_nav: <%= @disable_nav %> //if nothing then false </p>
+  <p>user_signed_in?: <%= user_signed_in? %></p> -->
+  <% end %>
     <%= yield %>
 
   </body>

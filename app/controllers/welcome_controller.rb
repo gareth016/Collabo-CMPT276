@@ -1,14 +1,14 @@
 class WelcomeController < ApplicationController
 	def index
-         @disable_nav = true
+    @disable_nav = true
 	end
 	
 	def start
-        @disable_nav = true
-       if user_signed_in?
-           redirect_to :profile
-       end
-    end
+      @disable_nav = true
+      if user_signed_in?
+        redirect_to :profile
+      end
+  end
 
   def signin
     if user_signed_in?
@@ -20,12 +20,13 @@ class WelcomeController < ApplicationController
   helper_method :signin
 
     def profile
-        @disable_nav = true
         if user_signed_in?
+          @disable_nav = false
         else
             redirect_to :start
         end
     end
     
+
 
 end
