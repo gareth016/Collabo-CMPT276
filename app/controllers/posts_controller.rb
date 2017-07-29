@@ -4,11 +4,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    if params[:tag]
-      @posts = Post.tagged_with(params[:tag])
-    else
+   # if params[:tag]
+  #    @posts = Post.tagged_with(params[:tag])
+  #  else
       @posts = Post.all
-  	end
+  #	end
   end
 
   # GET /posts/1

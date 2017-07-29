@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170729023659) do
-=======
-ActiveRecord::Schema.define(version: 20170723000624) do
->>>>>>> 24a8d2b50fcc6c4bec5c7bdae0b67f2e96b6752c
 
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
@@ -25,14 +21,11 @@ ActiveRecord::Schema.define(version: 20170723000624) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-<<<<<<< HEAD
   end
 
   create_table "group_users", force: :cascade do |t|
     t.integer "group_id"
     t.integer "user_id"
-=======
->>>>>>> 24a8d2b50fcc6c4bec5c7bdae0b67f2e96b6752c
   end
 
   create_table "groups", force: :cascade do |t|
@@ -40,29 +33,11 @@ ActiveRecord::Schema.define(version: 20170723000624) do
     t.integer  "leader_id"
     t.integer  "member_count", default: 0, null: false
     t.integer  "membership"
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    t.integer  "member_count",               default: 0, null: false
-    t.text     "group_info",   limit: 65535
-    t.text     "github_link",  limit: 65535
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.index ["group_name"], name: "index_groups_on_group_name", using: :btree
-    t.index ["leader"], name: "index_groups_on_leader", using: :btree
-    t.index ["leader_id"], name: "index_groups_on_leader_id", using: :btree
-    t.index ["tags"], name: "index_groups_on_tags", using: :btree
-=======
->>>>>>> 24a8d2b50fcc6c4bec5c7bdae0b67f2e96b6752c
     t.text     "group_info"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["group_name"], name: "index_groups_on_group_name"
     t.index ["leader_id"], name: "index_groups_on_leader_id"
-<<<<<<< HEAD
-=======
->>>>>>> 00e534527c8bf5d45a61ac923b5de5c8685e3d17
->>>>>>> 24a8d2b50fcc6c4bec5c7bdae0b67f2e96b6752c
   end
 
   create_table "groups_posts", id: false, force: :cascade do |t|
@@ -73,29 +48,11 @@ ActiveRecord::Schema.define(version: 20170723000624) do
   create_table "groups_tags", id: false, force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "tag_id",   null: false
-<<<<<<< HEAD
-=======
-  end
-
-  create_table "groups_users", id: false, force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "user_id"
-  end
-
-  create_table "memberships", force: :cascade do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_memberships_on_group_id"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
->>>>>>> 24a8d2b50fcc6c4bec5c7bdae0b67f2e96b6752c
   end
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"
-<<<<<<< HEAD
     t.text     "post"
     t.string   "tags"
     t.datetime "created_at", null: false
@@ -103,27 +60,6 @@ ActiveRecord::Schema.define(version: 20170723000624) do
     t.integer  "group_id"
     t.index ["tags"], name: "index_posts_on_tags"
     t.index ["user_id"], name: "index_posts_on_user_id"
-=======
-<<<<<<< HEAD
-    t.text     "post",       limit: 65535
-    t.string   "group"
-    t.string   "tags"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["group"], name: "index_posts_on_group", using: :btree
-    t.index ["tags"], name: "index_posts_on_tags", using: :btree
-    t.index ["title"], name: "index_posts_on_title", using: :btree
-    t.index ["user"], name: "index_posts_on_user", using: :btree
-    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
-=======
-    t.text     "post"
-    t.string   "tags"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["tags"], name: "index_posts_on_tags"
-    t.index ["user_id"], name: "index_posts_on_user_id"
->>>>>>> 00e534527c8bf5d45a61ac923b5de5c8685e3d17
->>>>>>> 24a8d2b50fcc6c4bec5c7bdae0b67f2e96b6752c
   end
 
   create_table "posts_tags", id: false, force: :cascade do |t|
@@ -166,29 +102,15 @@ ActiveRecord::Schema.define(version: 20170723000624) do
     t.boolean  "is_Admin",               default: false, null: false
     t.integer  "membership_id"
     t.integer  "group_id"
-<<<<<<< HEAD
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-=======
-<<<<<<< HEAD
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["group_id"], name: "index_users_on_group_id", using: :btree
-    t.index ["membership_id"], name: "index_users_on_membership_id", using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
-=======
->>>>>>> 24a8d2b50fcc6c4bec5c7bdae0b67f2e96b6752c
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["membership_id"], name: "index_users_on_membership_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
-<<<<<<< HEAD
-=======
->>>>>>> 00e534527c8bf5d45a61ac923b5de5c8685e3d17
->>>>>>> 24a8d2b50fcc6c4bec5c7bdae0b67f2e96b6752c
   end
 
 end
