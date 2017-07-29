@@ -1,5 +1,5 @@
-<%= form_for(group) do |f| %>
-  <% if group.errors.any? %>
+<%= form_for(@group) do | f| %>
+  <% if @group.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
 
@@ -20,6 +20,7 @@
     <%= f.label :group_info %>
     <%= f.text_area :group_info %>
   </div>
+
 
 
   <div class="actions">

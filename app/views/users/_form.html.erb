@@ -1,4 +1,3 @@
-<h2>Edit <%= @user.username.to_s.humanize %></h2>
 
 <%= form_for(@user) do |f| %>
   <% if user.errors.any? %>
@@ -58,6 +57,11 @@
     <%= f.text_field :email %>
   </div>
   
+  </br>
+  <div class="field">
+    <%= f.label :"Is this an Admin Account? true or false." %>
+    <%= f.text_field :is_Admin %>
+  </div>
   </br>
 <!-- Account Info Above -->
 

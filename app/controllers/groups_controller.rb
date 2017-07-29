@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+before_action :set_group, only: [:show, :edit, :update, :destroy]
+
   def index
     #if params[:tag]
     #  @groups = Group.tagged_with(params[:tag])
@@ -23,9 +25,13 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def edit
+    @group = Group.find(params[:id])
+  end
+
   def update
     respond_to do |format|
-      if @group.update(group_params)
+      if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
@@ -74,14 +80,11 @@ def join
   def set_group
     @group = Group.find(params[:id])
   end
-
-  def group_params
-    params.require(:group).permit(:membership)
-  end
-
   protected
   def group_params
-  	params.require(:group).permit(:group_name, :group_info, :leader, :member_count)
+    params.permit(:membership, :id, 
+      :tags, :group_name, :leader, :leader_id, 
+      :member_count, :group_info, :github_repo)
   end
 
 end

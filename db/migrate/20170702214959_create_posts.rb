@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration[5.0]
     		t.string	:title,			index: true, unique: false
     		t.text 		:post 	
       		t.string	:group,			index: true, unique:false,  foreign_key: true
-      		t.string	:tags,			index: true, unique: false, foreign_key: true
+      		t.string	:tag_list,			index: true, unique: false, foreign_key: true
 			t.timestamps
 		end
   	end

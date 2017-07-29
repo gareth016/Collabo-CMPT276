@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
-	belongs_to :group
+	attr_accessor :post, :title, :tag_list
+	belongs_to :user
+	belongs_to :group,		optional: true
 
 	has_many :comments, 	dependent: :destroy
 
@@ -17,7 +19,7 @@ class Post < ApplicationRecord
 
 	def all_tags=(names)
 		self.tags = names.split(",").map do |name|
-			tag.where(name: name.strip).first_or_create!
+			Tag.where(name: name.strip).first_or_create!
 		end
 	end
 
