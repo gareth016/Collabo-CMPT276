@@ -35,6 +35,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
+        puts @post.errors.full_messages
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -73,6 +74,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :post, :group, :user, :all_tags)
+      params.require(:post).permit(:id, :user_id, :title, :post, :tags, :created_at, :updated_at, :group_id)
     end
 end

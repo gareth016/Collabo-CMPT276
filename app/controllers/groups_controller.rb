@@ -1,19 +1,22 @@
 class GroupsController < ApplicationController
   def index
-    if params[:tag]
-      @groups = Group.tagged_with(params[:tag])
-    else
-      @groups = Group.all
-    end
+    #if params[:tag]
+    #  @groups = Group.tagged_with(params[:tag])
+    #else
+    #  @groups = Group.all
+    #end
     if params[:group_name]
       @groups = Group.group_name_with(params[:group_name])
     else
       @groups = Group.all
     end
   end
-
+# @groupmem = GroupUser.find_by group_id: "#{@groups.id}"
   def show
-    # redirect_to @group.github_repo
+    if params[:id]
+      @groups = Group.find(params[:id])
+      @groupmem = GroupUser.where(group_id: "#{@groups.id}").all
+    end
   end
 
   def new
@@ -33,22 +36,24 @@ class GroupsController < ApplicationController
   end
 
 
-
   def create
-  	@group = Group.new(group_params)
-  	respond_to do |format|
-  		if @group.save
-  			format.js
-  		else
-  			redirect_to group_path(@group)
-  		end
-  	end
+    @group = Group.new(group_params)
+
+    respond_to do |format|
+      if @group.save
+        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.json { render :show, status: :created, location: @group }
+      else
+        format.html { render :new }
+        format.json { render json: @group.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
-    @group = Group.find(params[:group_id])
+    @group = Group.find(params[:id])
     @group.destroy
-    redirect_to group_path(@group)
+    redirect_to groups_path
   end
 
 def join

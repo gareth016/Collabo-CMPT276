@@ -1,0 +1,24 @@
+
+<p>
+  <strong>Group Name:</strong>
+  <%= @groups.group_name %>
+</p>
+
+<p>
+  <strong>Group info:</strong>
+  <%= @groups.group_info %>
+</p>
+<div>
+<p>Members of <%= @groups.group_name %></p>
+  <% @groupmem.each do |groupmembers| %>
+    <tr>
+      <% user = groupmembers.user_id%>
+      <% actualuser = User.find(user) %>
+      <td><%= actualuser.username %></td>
+    </tr>
+</div>
+<% end %>
+<br />
+
+<%= link_to 'Edit', edit_group_path(@groups) %> |
+<%= link_to 'Back', groups_path %>

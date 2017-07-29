@@ -9,6 +9,7 @@ class Post < ApplicationRecord
 
 	validates :title, presence: true, length:{maximum:100}
 	validates :post, presence: true
+	validates :group_id, presence: true
 
 	def self.tagged_with(name)
 		Tag.find_by_name!(name).posts
