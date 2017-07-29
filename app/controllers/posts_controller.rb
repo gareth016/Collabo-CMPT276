@@ -4,9 +4,9 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-   # if params[:tag]
-  #    @posts = Post.tagged_with(params[:tag])
-  #  else
+    #if params[:tag]
+     # @posts = Post.tagged_with(params[:tag])
+   # else
       @posts = Post.all
   #	end
   end
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @post.save
+      if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
