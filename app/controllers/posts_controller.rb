@@ -32,6 +32,7 @@ class PostsController < ApplicationController
     @disable_nav = true
     if user_signed_in?
       @post = Post.new
+      @post.user_id = current_user.id
     else
       redirect_to new_user_session_path
     end
@@ -56,7 +57,6 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        puts @post.errors.full_messages
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end

@@ -23,7 +23,15 @@ class GroupsController < ApplicationController
 
   def new
     @disable_nav = true
+    if user_signed_in?
     @group = Group.new
+    @group.member_count = 1
+    @group.leader_id = current_user.user_id
+    @group.group_info = "Group has not added anything yet."
+    else
+      redirect_to new_user_session_path
+    end
+
   end
 
   def update

@@ -1,24 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Collab Group Name</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	    <%= stylesheet_link_tag "group_main" %>
+	    <%= stylesheet_link_tag "noscript" %>
+	</head>
+	<body class="is-loading">
 
-<p>
-  <strong>Group Name:</strong>
-  <%= @groups.group_name %>
-</p>
+			<div id="wrapper">
 
-<p>
-  <strong>Group info:</strong>
-  <%= @groups.group_info %>
-</p>
-<div>
-<p>Members of <%= @groups.group_name %></p>
-  <% @groupmem.each do |groupmembers| %>
-    <tr>
-      <% user = groupmembers.user_id%>
-      <% actualuser = User.find(user) %>
-      <td><%= actualuser.username %></td>
-    </tr>
-</div>
-<% end %>
-<br />
+					<header id="header">
 
-<%= link_to 'Edit', edit_group_path(@groups) %> |
-<%= link_to 'Back', groups_path %>
+						<div class = "logo"><%= link_to("#{@groups.group_name}", groups_path)%></div>
+					</header>
+
+					<div id="main">
+
+							<section class="post">
+								<header class="major">
+									<h1><%= @groups.group_name %><br />
+									</h1>
+								</header>
+								<div class="image main"><%= image_tag("gl00#{rand(6)}.jpg", :alt=>"")%></div>
+								<p><h3>Number of Members: <%= @groups.member_count %></h3></p>
+								<p><h3>Created: <%= time_ago_in_words(@groups.created_at)%> ago</h3></p>
+								<p><h3>Leader:<%=User.find(@groups.leader_id).username%></p></h3>
+								<p><h3>Group Members:
+								  <% @groupmem.each do |groupmembers| %>
+                    <tr>
+                      <% user = groupmembers.user_id%>
+                      <% actualuser = User.find(user) %>
+                      <li><%= actualuser.username %></li>
+                    </tr>
+                  <% end %>
+								</p></h3>
+								<p><h3>Group Info:</h3><%= @groups.group_info%></p>
+							</section>
+            
+            <section>
+							<ul class="actions" align="center">
+								<li><a href="#" class="button special big">Join</a></li>
+                <li><a href="#" class="button">Contact Us</a></li>
+              </ul>
+						</section>
+					</div>
+
+					<div id="copyright">
+						<ul><li>&copy; Collabo by SFU</li></ul>
+					</div>
+
+			</div>
+
+	</body>
+</html>
+
