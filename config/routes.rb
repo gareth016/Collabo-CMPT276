@@ -12,8 +12,13 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   devise_for :groups
-  resources :groups
-
+  resources :groups do
+    member do
+      get 'join'
+      get 'leave'
+    end
+  end
+  
   # POST 'groups/new'
 
   resources :posts do

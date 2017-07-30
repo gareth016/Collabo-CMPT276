@@ -15,9 +15,13 @@ class GroupsController < ApplicationController
 # @groupmem = GroupUser.find_by group_id: "#{@groups.id}"
   def show
     @disable_nav = true
-    if params[:id]
-      @groups = Group.find(params[:id])
-      @groupmem = GroupUser.where(group_id: "#{@groups.id}").all
+    if user_signed_in?
+      if params[:id]
+        @groups = Group.find(params[:id])
+        @groupmem = GroupUser.where(group_id: "#{@groups.id}").all
+      end
+    else
+      redirect_to new_user_session_path
     end
   end
 
@@ -25,17 +29,21 @@ class GroupsController < ApplicationController
     @disable_nav = true
     if user_signed_in?
     @group = Group.new
-    @group.member_count = 1
-    @group.leader_id = current_user.user_id
     @group.group_info = "Group has not added anything yet."
     else
-      redirect_to new_user_session_path
+      redirect_to new_user_sessic9on_path
     end
 
   end
 
   def update
+    if user_signed_in?
+    else
+      redirect_to new_user_session_path
+      return
+    end
     respond_to do |format|
+      @group = Group.find(params[:id])
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
@@ -46,15 +54,40 @@ class GroupsController < ApplicationController
     end
   end
 
-
+  def edit
+    if user_signed_in?
+    else
+      redirect_to new_user_session_path
+      return
+    end
+    @groups = Group.find(params[:id])
+    if user_in_group(current_user,@groups)
+    else
+      redirect_to groups_path
+      puts "ERROR Tried to edit group when user is not a member of the group"
+      return
+    end
+  end
+  
   def create
     @group = Group.new(group_params)
-
+    @group.member_count = 1
+    @group.leader_id = current_user.id
+    @m = GroupUser.new
+    if @group.save
+    else
+        format.html { render :new }
+    end
+    @m.group_id = @group.id
+    @m.user_id = current_user.id
+    @group.save
     respond_to do |format|
-      if @group.save
+      if @m.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
+        @group.destroy
+        @m.destroy
         format.html { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
@@ -62,14 +95,33 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+    if user_signed_in?
+    else
+      redirect_to new_user_session_path
+      return
+    end
     @group = Group.find(params[:id])
+    if user_in_group(current_user,@group)
+    else
+      redirect_to groups_path
+      puts "ERROR Tried to destroy group when user is not a member of the group"
+      return
+    end
     @group.destroy
     redirect_to groups_path
   end
 
   def join
+    if user_signed_in?
+    else
+      redirect_to new_user_session_path
+      return
+    end
     @group = Group.find(params[:id])
-    @m = @group.memberships.build(:user_id => current_user.id)
+    @m = GroupUser.new
+    @m.group_id = @group.id
+    @m.user_id = current_user.id
+    @group.member_count = @group.member_count + 1
     respond_to do |format|
       if @m.save
         format.html { redirect_to(@group, notice: 'You have successfully joined this group.') }
@@ -81,18 +133,56 @@ class GroupsController < ApplicationController
     end
   end
 
+  def leave
+    if user_signed_in?
+    else
+      redirect_to new_user_session_path
+      return
+    end
+    @group = Group.find(params[:id])
+    if !(user_in_group(current_user,@group))
+      puts "ERROR user tried to leave group when he/she is currently not in the group!"
+      return
+    end
+    
+    if (@groupuser = GroupUser.find_by group_id: "#{@group.id}", user_id: "#{current_user.id}")
+      @groupuser.destroy
+      @group.member_count = @group.member_count - 1
+      
+      if(@group.member_count <= 0)
+        @group.destroy
+        redirect_to groups_path
+        return
+      else
+        @group.save
+      end
+      
+      if(current_user.id == @group.leader_id)
+        @groupuser = GroupUser.find_by group_id: "#{@group.id}"
+        @group.leader_id = (@groupuser.user_id)
+        @group.save
+      end
+    end
+    redirect_to groups_path
+  end
+
+
+  
   private
   def set_group
     @group = Group.find(params[:id])
   end
-
-  def group_params
-    params.require(:group).permit(:membership)
+  
+  def user_in_group(user, group)
+    return GroupUser.exists?(group_id: group.id, user_id: user.id)
   end
-
+  def group_params
+    params.require(:group).permit(:group_name, :group_info, :leader_id, :member_count)
+  end
+  
   protected
   def group_params
-  	params.require(:group).permit(:group_name, :group_info, :leader, :member_count)
+  	params.require(:group).permit(:group_name, :group_info, :leader_id, :member_count)
   end
 
 end

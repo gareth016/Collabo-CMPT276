@@ -41,8 +41,13 @@
             
             <section>
 							<ul class="actions" align="center">
-								<li><a href="#" class="button special big">Join</a></li>
-                <li><a href="#" class="button">Contact Us</a></li>
+								<% if GroupUser.exists?(group_id: @groups.id, user_id: current_user.id)%>
+								<li><div class = "button"><%= link_to('Edit', edit_group_path(@groups))%></div></li>
+								<li><div class = "button"><%= link_to('Leave', leave_group_path(@groups))%></div></li>
+								<li><div class = "button"><%= link_to('Destroy', @groups, method: :delete, data: { confirm: 'Are you sure?' })%></div></li>
+              	<%else%>
+								<li><div class = "button special big"><%= link_to('Join', join_group_path(@groups)) %></div></li>
+              	<% end %>
               </ul>
 						</section>
 					</div>
