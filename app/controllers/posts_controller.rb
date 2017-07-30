@@ -4,25 +4,46 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    if params[:tag]
-      @posts = Post.tagged_with(params[:tag])
+    @disable_nav = true
+    if user_signed_in?
+      if params[:tag]
+        @posts = Post.tagged_with(params[:tag])
+      else
+        @posts = Post.all
+  	  end
     else
-      @posts = Post.all
-  	end
+      redirect_to new_user_session_path
+    end
+    
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @disable_nav = true
+    if user_signed_in?
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @disable_nav = true
+    if user_signed_in?
+      @post = Post.new
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /posts/1/edit
   def edit
+    @disable_nav = true
+    if user_signed_in?
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # POST /posts

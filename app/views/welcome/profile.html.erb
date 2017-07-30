@@ -14,24 +14,8 @@
 			<header id="header">
 				<div class="inner">
 					<!-- <div class = "image avatar"><%= image_tag("avatar00.jpg", :alt=>"")%></div> -->
-					<h1><strong><%=current_user.username %></strong><br />
+                    <h1><strong><%=current_user.username %></strong></h1><br />
 				</div>
-<!--
-                <nav id="nav">
-							<ul>
-								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-									<div id="menu">
-										<ul>
-											<li><a href="index.html">Home</a></li>
-											<li><a href="#">Sign Up</a></li>
-											<li><a href="#">Log In</a></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</nav>
--->
 			</header>
 
 			<div id="main">
@@ -41,17 +25,13 @@
 							<%= grav_pic(current_user)%>
 							<h2><%= current_user.username%>'s Profile Page <br /></h2>
 							<div></div>
-<<<<<<< HEAD
-							<div class = "button"><%= link_to('Edit Profile',edit_user_registration_path(current_user)) %></div>
-=======
 							<div class = "button"><%= link_to 'Edit', edit_user_registration_path(current_user) %></div>
->>>>>>> d21f5e72f45461d3918d555220677048e000157d
 							<div class = "button"><%= link_to('Logout', destroy_user_session_path, method: :delete)%></div>
 						</header>
 						<ul>
                             <li>Username: <%= current_user.username%></li>
                             <li>Email: <%= current_user.email%></li>
-                            <li>Account Created: <%= time_ago_in_words(current_user.created_at) %></li>
+                            <li>Account Created: <%= time_ago_in_words(current_user.created_at) %> ago</li>
                         </ul>
 						<ul class="actions">
 							<li><a href="#three" class="button">Contact Me</a></li>
@@ -124,8 +104,6 @@
 					</ul>
 				</div>
 			</footer>
-
-
 			<script src="assets/js/profile_jquery.min.js"></script>
 			<script src="assets/js/profile_jquery.poptrox.min.js"></script>
 			<script src="assets/js/profile_skel.min.js"></script>

@@ -1,18 +1,20 @@
 class GroupsController < ApplicationController
   def index
-    #if params[:tag]
-    #  @groups = Group.tagged_with(params[:tag])
-    #else
-    #  @groups = Group.all
-    #end
-    if params[:group_name]
-      @groups = Group.group_name_with(params[:group_name])
+    @disable_nav = true
+    if user_signed_in?
+      if params[:group_name]
+        @groups = Group.group_name_with(params[:group_name])
+      else
+        @groups = Group.all
+      end        
     else
-      @groups = Group.all
+      redirect_to new_user_session_path
     end
+
   end
 # @groupmem = GroupUser.find_by group_id: "#{@groups.id}"
   def show
+    @disable_nav = true
     if params[:id]
       @groups = Group.find(params[:id])
       @groupmem = GroupUser.where(group_id: "#{@groups.id}").all
@@ -20,6 +22,7 @@ class GroupsController < ApplicationController
   end
 
   def new
+    @disable_nav = true
     @group = Group.new
   end
 
@@ -56,7 +59,7 @@ class GroupsController < ApplicationController
     redirect_to groups_path
   end
 
-def join
+  def join
     @group = Group.find(params[:id])
     @m = @group.memberships.build(:user_id => current_user.id)
     respond_to do |format|
