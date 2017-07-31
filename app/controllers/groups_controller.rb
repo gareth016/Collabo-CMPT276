@@ -19,9 +19,16 @@ class GroupsController < ApplicationController
       if params[:id]
         @groups = Group.find(params[:id])
         @groupmem = GroupUser.where(group_id: "#{@groups.id}").all
+        @posts_of_group = Post.where(group_id: "#{@groups.id}").all
+        if @posts_of_group.blank?
+          @show_table = false
+        else
+          @show_table = true
+        end
       end
     else
       redirect_to new_user_session_path
+      return
     end
   end
 
