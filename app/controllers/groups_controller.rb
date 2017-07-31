@@ -101,6 +101,7 @@ class GroupsController < ApplicationController
       return
     end
     @group = Group.find(params[:id])
+    @groups_of_user = GroupUser.where(group_id: "#{@group.id}").all
     if user_in_group(current_user,@group)
     else
       redirect_to groups_path
@@ -108,6 +109,9 @@ class GroupsController < ApplicationController
       return
     end
     @group.destroy
+    @groups_of_user.each do |groupmem|
+      groupmem.destroy
+    end
     redirect_to groups_path
   end
 
