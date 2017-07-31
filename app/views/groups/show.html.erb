@@ -38,6 +38,38 @@
 								</p></h3>
 								<p><h3>Group Info:</h3><%= @groups.group_info%></p>
 							</section>
+
+					<section id="three">
+						<h2>Posts</h2>
+						<% if @show_table %>
+							<div class="row">
+								<table class="table">
+								    <thead>
+								    <tr>
+								        <th>#</th>
+								        <th>User</th>
+								        <th>Title</th>
+								        <th>Post</th>
+								      </tr>
+								    </thead>
+								    <tbody>
+								    	<% i = 0 %>
+								    	<% @posts_of_group.each do |post| %>
+								    		<% i = i + 1 %>
+									    	<tr>
+									      	<th scope="row"><%= i %></th>
+									      	<td><%= User.find(post.user_id).username %></td>
+									      	<td><%= post.title %></td>
+									      	<td><%= post.post %></td>
+									    	</tr>
+								    	<% end %>
+								    </tbody>
+								</table>
+							</div>
+						<% else %>
+						<h4>This group has not made any posts yet. You can be the first one to post here!</h4>
+						<% end %>
+					</section>
             
             <section>
 							<ul class="actions" align="center">

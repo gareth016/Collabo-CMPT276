@@ -59,9 +59,35 @@
 					</section>
 
 					<section id="three">
-						<h2><%= current_user.username %>'s Posts </h2>
-						<div class="row">
-						
+						<h2>Posts </h2>
+						<% if @show_table %>
+							<div class="row">
+								<table class="table">
+								    <thead>
+								    <tr>
+								        <th>#</th>
+								        <th>Group</th>
+								        <th>Title</th>
+								        <th>Post</th>
+								      </tr>
+								    </thead>
+								    <tbody>
+								    	<% i = 0 %>
+								    	<% @posts_of_user.each do |post| %>
+								    		<% i = i + 1 %>
+									    	<tr>
+									      	<th scope="row"><%= i %></th>
+									      	<td><%= link_to("#{Group.find(post.group_id).group_name}", "groups/#{post.group_id}") %></td>
+									      	<td><%= post.title %></td>
+									      	<td><%= post.post %></td>
+									    	</tr>
+								    	<% end %>
+								    </tbody>
+								</table>
+							</div>
+						<% else %>
+						<h4>You have not made any posts yet. Try joining a group and posting there.</h4>
+						<% end %>
 					</section>
 
 					<section id="four">

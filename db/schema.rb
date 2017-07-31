@@ -10,61 +10,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170731033706) do
+ActiveRecord::Schema.define(version: 20170729023659) do
 
-  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
     t.string   "commenter"
-    t.text     "body",       limit: 65535
+    t.text     "body"
     t.integer  "post_id"
     t.integer  "user_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
-  create_table "group_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "group_users", force: :cascade do |t|
     t.integer "group_id"
     t.integer "user_id"
   end
 
-  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "groups", force: :cascade do |t|
     t.string   "group_name"
     t.string   "leader"
     t.integer  "leader_id"
     t.string   "tags"
     t.integer  "membership"
-    t.integer  "member_count",               default: 0, null: false
-    t.text     "group_info",   limit: 65535
-    t.text     "github_link",  limit: 65535
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.integer  "member_count", default: 0, null: false
+    t.text     "group_info"
+    t.text     "github_repo"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["group_name"], name: "index_groups_on_group_name", using: :btree
     t.index ["leader"], name: "index_groups_on_leader", using: :btree
     t.index ["leader_id"], name: "index_groups_on_leader_id", using: :btree
     t.index ["tags"], name: "index_groups_on_tags", using: :btree
   end
 
-  create_table "groups_posts", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "groups_posts", id: false, force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "post_id",  null: false
     t.index ["group_id", "post_id"], name: "index_groups_posts_on_group_id_and_post_id", using: :btree
     t.index ["post_id", "group_id"], name: "index_groups_posts_on_post_id_and_group_id", using: :btree
   end
 
-  create_table "groups_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "groups_tags", id: false, force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "tag_id",   null: false
     t.index ["group_id", "tag_id"], name: "index_groups_tags_on_group_id_and_tag_id", using: :btree
     t.index ["tag_id", "group_id"], name: "index_groups_tags_on_tag_id_and_group_id", using: :btree
   end
 
-  create_table "groups_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "groups_users", id: false, force: :cascade do |t|
     t.integer "group_id"
     t.integer "user_id"
   end
 
-  create_table "memberships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "memberships", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -73,15 +76,15 @@ ActiveRecord::Schema.define(version: 20170731033706) do
     t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
   end
 
-  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "user"
     t.string   "title"
-    t.text     "post",       limit: 65535
+    t.text     "post"
     t.string   "group"
     t.string   "tags"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "group_id"
     t.index ["group"], name: "index_posts_on_group", using: :btree
     t.index ["tags"], name: "index_posts_on_tags", using: :btree
@@ -90,14 +93,14 @@ ActiveRecord::Schema.define(version: 20170731033706) do
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
-  create_table "posts_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "posts_tags", id: false, force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "tag_id",  null: false
     t.index ["post_id", "tag_id"], name: "index_posts_tags_on_post_id_and_tag_id", using: :btree
     t.index ["tag_id", "post_id"], name: "index_posts_tags_on_tag_id_and_post_id", using: :btree
   end
 
-  create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "taggings", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "tag_id"
     t.integer  "groups_id"
@@ -108,24 +111,13 @@ ActiveRecord::Schema.define(version: 20170731033706) do
     t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
   end
 
-  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_group_posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_user_group_posts_on_group_id", using: :btree
-    t.index ["post_id"], name: "index_user_group_posts_on_post_id", using: :btree
-    t.index ["user_id"], name: "index_user_group_posts_on_user_id", using: :btree
-  end
-
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password"
     t.string   "email",                  default: "",    null: false
@@ -143,6 +135,10 @@ ActiveRecord::Schema.define(version: 20170731033706) do
     t.boolean  "is_Admin",               default: false, null: false
     t.integer  "membership_id"
     t.integer  "group_id"
+    t.text     "skills"
+    t.text     "about_info"
+    t.text     "location"
+    t.text     "github"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -159,9 +155,6 @@ ActiveRecord::Schema.define(version: 20170731033706) do
   add_foreign_key "taggings", "groups", column: "groups_id"
   add_foreign_key "taggings", "posts"
   add_foreign_key "taggings", "tags"
-  add_foreign_key "user_group_posts", "groups"
-  add_foreign_key "user_group_posts", "posts"
-  add_foreign_key "user_group_posts", "users"
   add_foreign_key "users", "groups"
   add_foreign_key "users", "memberships"
 end

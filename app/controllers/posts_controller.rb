@@ -57,8 +57,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     respond_to do |format|
       if @post.save
-        #format.html { redirect_to(@post, notice: 'You have successfully joined this group.') }#controller: groups, action: show, id: 16 }#group_path(16)}#(post_params[:group_id])}#, notice: 'Post was successfully created.' }
-        format.html { redirect_to action: new }
+        format.html { redirect_to(@post, notice: 'You have successfully joined this group.') }#controller: groups, action: show, id: 16 }#group_path(16)}#(post_params[:group_id])}#, notice: 'Post was successfully created.' }
+        #format.html { redirect_to action: new }
         #format.json { render json: { location: "/posts/63"}  }
       else
         #format.html { render :new }
@@ -101,6 +101,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:id, :user_id, :title, :post, :tags, :created_at, :updated_at, :group_id, :all_tags)
+      params.require(:post).permit(:id, :user_id, :title, :post, :tags, :created_at, :updated_at, :group_id, :all_tags)#.merge(user_id: current_user.id)
     end
 end
