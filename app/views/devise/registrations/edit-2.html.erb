@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <%= stylesheet_link_tag "profile" %>
+		<title>Collabo Profile</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+	<body id="top">
+
+			<header id="header">
+				<div class="inner">
+					<!-- <div class = "image avatar"><%= image_tag("avatar00.jpg", :alt=>"")%></div> -->
+                    <h1><strong><%=current_user.username %></strong></h1><br />
+				</div>
+			</header>
+
+			<div id="main">
+
+					<section id="three">
+						<h2>Edit Profile</h2>
+						<p></p>
+						<div class="row">
+							<div class="8u 12u$(small)">
+								<form method="post" action="#">
+									<div class="row uniform 50%">
+										<div class="6u 12u$(xsmall)"><input type="text" name="name" id="name" placeholder="Name" /></div>
+										<div class="6u$ 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="Email" /></div>
+										<div class="6u 12u$(xsmall)"><input type="password" name="password" id="name" placeholder="Password" /></div>
+										<div class="6u 12u$(xsmall)"><input type="password" name="password" id="name" placeholder="Confirm Password" /></div>
+										
+										<div class="12u$"><textarea name="message" id="message" placeholder="Skills" rows="4"></textarea></div>
+                                        <div class="6u 12u$(xsmall)"><input type="file" accept="image/*" value="image"/></div> <!--image upload-->
+									</div>
+								</form>
+								<ul class="actions">
+									<li><input type="submit" value="Save" /></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+	
+			</div>
+
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Collabo by SFU</li>
+					</ul>
+				</div>
+			</footer>
+
+			<script src="assets/js/profile_jquery.min.js"></script>
+			<script src="assets/js/profile_jquery.poptrox.min.js"></script>
+			<script src="assets/js/profile_skel.min.js"></script>
+			<script src="assets/js/profile_util.js"></script>
+			<script src="assets/js/profile_main.js"></script>
+
+	</body>
+</html>
