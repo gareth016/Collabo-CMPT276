@@ -17,23 +17,32 @@
     <%= f.text_field :title, placeholder: "Title" %>
   </div>
 
+  <% if @require_group_id == true %>
   <!-- this needs to become a drop down menu bar -->
   <div class="field">
     <%= f.label :group %>
     <%= f.text_field :group_id, placeholder: "Group" %>
   </div> 
   <!-- this needs to become a drop down menu bar/ -->
-
+  <% end %>
 
   <div class="field">
     <%= f.label :post %>
     <%= f.text_area :post, placeholder: "Your Post", rows: 6 %>
   </div>
 
+<% if false %>
+<!--
   <div class="field">
     <%= f.label :tags %>
     <%= f.text_field :all_tags, placeholder: "Tags are separated with a comma" %>
   </div>
+-->
+<% end %>
+
+<div class = "botton">
+  <%= f.hidden_field :group_id, value: @group_id %>
+</div>
 
   <div class="actions">
     <%= f.submit "Post", class: "button" %>

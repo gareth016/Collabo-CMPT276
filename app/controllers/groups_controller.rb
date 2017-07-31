@@ -31,7 +31,7 @@ class GroupsController < ApplicationController
     @group = Group.new
     @group.group_info = "Group has not added anything yet."
     else
-      redirect_to new_user_sessic9on_path
+      redirect_to new_user_session_path
     end
 
   end
@@ -166,6 +166,9 @@ class GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+  # def make_post
+  #   redirct_to new_post_path(@group)
+  # end
 
   
   private

@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
       redirect_to new_user_session_path
     end
     @groups_of_user = GroupUser.where(user_id: "#{current_user.id}").all
-    @posts_of_user = GroupUser.where(user_id: "#{current_user.id}").all
+    @posts_of_user = Post.where(user_id: "#{current_user.id}").all
   end
 
   def grouplist

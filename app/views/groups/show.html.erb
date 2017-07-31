@@ -42,6 +42,7 @@
             <section>
 							<ul class="actions" align="center">
 								<% if GroupUser.exists?(group_id: @groups.id, user_id: current_user.id)%>
+								<li><div class = "button"><%= link_to('Make a Post', :controller => :posts, :action => :new , :id => @groups.id) %></div></li>
 								<li><div class = "button"><%= link_to('Edit', edit_group_path(@groups))%></div></li>
 								<li><div class = "button"><%= link_to('Leave', leave_group_path(@groups))%></div></li>
 								<li><div class = "button"><%= link_to('Destroy', @groups, method: :delete, data: { confirm: 'Are you sure?' })%></div></li>

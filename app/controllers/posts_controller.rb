@@ -32,7 +32,11 @@ class PostsController < ApplicationController
     @disable_nav = true
     if user_signed_in?
       @post = Post.new
-      @post.user_id = current_user.id
+      @user_id = current_user.id
+      @group_id = params[:id]
+      if params[:id]
+        @require_group_id = false
+      end
     else
       redirect_to new_user_session_path
     end
@@ -51,14 +55,14 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        #format.html { redirect_to(@post, notice: 'You have successfully joined this group.') }#controller: groups, action: show, id: 16 }#group_path(16)}#(post_params[:group_id])}#, notice: 'Post was successfully created.' }
+        format.html { redirect_to action: new }
+        #format.json { render json: { location: "/posts/63"}  }
       else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        #format.html { render :new }
+        #format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -87,6 +91,8 @@ class PostsController < ApplicationController
     end
   end
 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -95,6 +101,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:id, :user_id, :title, :post, :tags, :created_at, :updated_at, :group_id)
+      params.require(:post).permit(:id, :user_id, :title, :post, :tags, :created_at, :updated_at, :group_id, :all_tags)
     end
 end

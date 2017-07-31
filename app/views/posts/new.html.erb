@@ -2,4 +2,14 @@
 
 <%= render 'form', post: @post %>
 
+<% if false %>
+<!-- 
+<h2>group id: <%= @group_id %></h2>
+-->
+<% end %>
+
+<%= link_to 'Back to Group', group_path(@group_id) %>
+
+<% if false %>
 <%= link_to 'Back', posts_path %>
+<% end %>

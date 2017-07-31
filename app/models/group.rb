@@ -5,7 +5,8 @@ class Group < ApplicationRecord
 	has_many :taggings
 	has_many :tags, 		through: :taggings 
 
-	has_many :posts
+	#has_many :user_group_posts
+	#has_many :posts, through: :user_group_posts
 	
 	has_many :group_users
 	has_many :users, through: :group_users
